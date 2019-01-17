@@ -1,0 +1,23 @@
+name: ip_address_only
+attributes:
+  - name: project_id
+    required: true
+    type: string
+
+  - name: region
+    required: true
+    type: string
+
+  - name: credentials_path
+    required: true
+    type: string
+
+  - name: names
+    required: true
+    type: array
+
+  - name: addresses
+    required: true
+    type: array
+
+ 

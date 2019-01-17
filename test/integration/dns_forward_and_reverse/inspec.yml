@@ -1,0 +1,29 @@
+name: dns_forward_and_reverse
+attributes:
+  - name: project_id
+    required: true
+    type: string
+
+  - name: region
+    required: true
+    type: string
+
+  - name: credentials_path
+    required: true
+    type: string
+
+  - name: addresses
+    required: true
+    type: array
+
+  - name: names
+    required: true
+    type: array
+
+  - name: dns_fqdns
+    required: true
+    type: array
+
+  - name: reverse_dns_fqdns
+    required: true
+    type: array

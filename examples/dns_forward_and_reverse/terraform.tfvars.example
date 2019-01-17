@@ -1,0 +1,10 @@
+# Region and Project setup
+region           = "us-west1"
+project_id       = "my-project-name"
+
+# Path to the credentials file of an account with sufficient access to
+# create resources via Terraform
+credentials_path = "/path/to/credentials.json"
+
+# The domain name to be used for the example
+dns_domain       = "gcpexample.org"
