@@ -1,4 +1,4 @@
-# Google Address Terraform Module
+# [Google Address Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/addres/google/)
 
 This terraform module provides the means to permanently reserve an [IP address](https://cloud.google.com/compute/docs/ip-addresses/)
 available to Google Cloud Platform (GCP) resources, and optionally create
