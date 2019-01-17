@@ -1,6 +1,6 @@
-# terraform-google-address
+# Google Address Terraform Module
 
-This terraform module provides the means to permanently reserve an IP address
+This terraform module provides the means to permanently reserve an [IP address](https://cloud.google.com/compute/docs/ip-addresses/)
 available to Google Cloud Platform (GCP) resources, and optionally create
 forward and reverse entries within Google Cloud DNS. The intent is to provide an
 address resource which exists independent of the lifecycle of the resources
@@ -15,16 +15,20 @@ Examples are provided in the `examples` folder, but to simply reserve IP
 addresses on a subnetwork without registering them in DNS refer to the
 following example:
 
-    module "address-fe" {
-      source     = "terraform-google-modules/address/google"
-      subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
+```hcl
+module "address-fe" {
+  source  = "terraform-google-modules/address/google"
+  version = "0.1.0"
 
-      names = [
-        "gusw1-dev-fooapp-fe-0001-a-001-ip",
-        "gusw1-dev-fooapp-fe-0001-a-002-ip",
-        "gusw1-dev-fooapp-fe-0001-a-003-ip"
-      ]
-    }
+  subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
+
+  names = [
+    "gusw1-dev-fooapp-fe-0001-a-001-ip",
+    "gusw1-dev-fooapp-fe-0001-a-002-ip",
+    "gusw1-dev-fooapp-fe-0001-a-003-ip"
+  ]
+}
+```
 
 Then perform the following commands on the root folder:
 
@@ -41,22 +45,26 @@ variable, so size that list accordingly.
 
 If you would prefer to provide the specific IP addresses to be reserved, that can be accomplished with the `addresses` input variable:
 
-    module "address-fe" {
-      source     = "terraform-google-modules/address/google"
-      subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
+```hcl
+module "address-fe" {
+  source  = "terraform-google-modules/address/google"
+  version = "0.1.0"
 
-      names = [
-        "gusw1-dev-fooapp-fe-0001-a-001-ip",
-        "gusw1-dev-fooapp-fe-0001-a-002-ip",
-        "gusw1-dev-fooapp-fe-0001-a-003-ip"
-      ]
+  subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
 
-      addresses = [
-        "10.11.0.10",
-        "10.11.0.11",
-        "10.11.0.12"
-      ]
-    }
+  names = [
+    "gusw1-dev-fooapp-fe-0001-a-001-ip",
+    "gusw1-dev-fooapp-fe-0001-a-002-ip",
+    "gusw1-dev-fooapp-fe-0001-a-003-ip"
+  ]
+
+  addresses = [
+    "10.11.0.10",
+    "10.11.0.11",
+    "10.11.0.12"
+  ]
+}
+```
 
 Note that the IP addresses must not be reserved and must fall within the range of the provided subnetwork.
 
@@ -64,12 +72,15 @@ Note that the IP addresses must not be reserved and must fall within the range o
 
 External IP addresses can be reserved by setting the `global` input var to `true` and omitting the subnetwork:
 
-    module "address-fe" {
-      source = "terraform-google-modules/address/google"
-      names  = [ "external-facing-ip"]
-      global = true
-    }
+```hcl
+module "address-fe" {
+  source  = "terraform-google-modules/address/google"
+  version = "0.1.0"
 
+  names  = [ "external-facing-ip"]
+  global = true
+}
+```
 
 ## DNS Examples
 
@@ -78,26 +89,30 @@ DNS by providing information on the project hosting the Cloud DNS zone, the
 managed zone name, the domain registered with Cloud DNS, and setting the
 `enable_gcp_dns` feature flag to `true`:
 
-    module "address-fe" {
-      source               = "terraform-google-modules/address/google"
-      subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
-      enable_gcp_dns       = true
-      gcp_dns_project      = "gcp-dns"
-      gcp_dns_domain       = "example.com"
-      gcp_dns_managed_zone = "nonprod-dns-zone"
+```hcl
+module "address-fe" {
+  source  = "terraform-google-modules/address/google"
+  version = "0.1.0"
 
-      names = [
-        "gusw1-dev-fooapp-fe-0001-a-001-ip",
-        "gusw1-dev-fooapp-fe-0001-a-002-ip",
-        "gusw1-dev-fooapp-fe-0001-a-003-ip"
-      ]
+  subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
+  enable_gcp_dns       = true
+  gcp_dns_project      = "gcp-dns"
+  gcp_dns_domain       = "example.com"
+  gcp_dns_managed_zone = "nonprod-dns-zone"
 
-      dns_short_names = [
-        "gusw1-dev-fooapp-fe-0001-a-001",
-        "gusw1-dev-fooapp-fe-0001-a-002",
-        "gusw1-dev-fooapp-fe-0001-a-003"
-      ]
-    }
+  names = [
+    "gusw1-dev-fooapp-fe-0001-a-001-ip",
+    "gusw1-dev-fooapp-fe-0001-a-002-ip",
+    "gusw1-dev-fooapp-fe-0001-a-003-ip"
+  ]
+
+  dns_short_names = [
+    "gusw1-dev-fooapp-fe-0001-a-001",
+    "gusw1-dev-fooapp-fe-0001-a-002",
+    "gusw1-dev-fooapp-fe-0001-a-003"
+  ]
+}
+```
 
 ### Reverse DNS
 
@@ -105,28 +120,32 @@ The module also supports the ability to register reverse DNS entries within
 their own zone by setting the `enable_gcp_ptr` feature flag to `true` and
 specifying the zone with the `gcp_dns_reverse_zone` input variable:
 
-    module "address-fe" {
-      source               = "terraform-google-modules/address/google"
-      subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
-      enable_gcp_dns       = true
-      enable_gcp_ptr       = true
-      gcp_dns_project      = "gcp-dns"
-      gcp_dns_domain       = "example.com"
-      gcp_dns_managed_zone = "nonprod-dns-zone"
-      gcp_dns_reverse_zone = "nonprod-dns-reverse-zone"
+```hcl
+module "address-fe" {
+  source  = "terraform-google-modules/address/google"
+  version = "0.1.0"
 
-      names = [
-        "gusw1-dev-fooapp-fe-0001-a-001-ip",
-        "gusw1-dev-fooapp-fe-0001-a-002-ip",
-        "gusw1-dev-fooapp-fe-0001-a-003-ip"
-      ]
+  subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
+  enable_gcp_dns       = true
+  enable_gcp_ptr       = true
+  gcp_dns_project      = "gcp-dns"
+  gcp_dns_domain       = "example.com"
+  gcp_dns_managed_zone = "nonprod-dns-zone"
+  gcp_dns_reverse_zone = "nonprod-dns-reverse-zone"
 
-      dns_short_names = [
-        "gusw1-dev-fooapp-fe-0001-a-001",
-        "gusw1-dev-fooapp-fe-0001-a-002",
-        "gusw1-dev-fooapp-fe-0001-a-003"
-      ]
-    }
+  names = [
+    "gusw1-dev-fooapp-fe-0001-a-001-ip",
+    "gusw1-dev-fooapp-fe-0001-a-002-ip",
+    "gusw1-dev-fooapp-fe-0001-a-003-ip"
+  ]
+
+  dns_short_names = [
+    "gusw1-dev-fooapp-fe-0001-a-001",
+    "gusw1-dev-fooapp-fe-0001-a-002",
+    "gusw1-dev-fooapp-fe-0001-a-003"
+  ]
+}
+```
 
 As with the non-DNS examples above, the `addresses` input variable can be
 provided with a list of specific IP addresses to be reserved if desired.
