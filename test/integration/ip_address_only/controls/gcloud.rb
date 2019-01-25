@@ -13,14 +13,11 @@
 # limitations under the License.
 
 project_id       = attribute('project_id')
-region           = attribute('region')
 credentials_path = attribute('credentials_path')
 names            = attribute('names')
 addresses        = attribute('addresses')
 
-ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = File.absolute_path(
-  credentials_path,
-  File.join(__dir__, "../../../../examples/ip_address_only"))
+ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = credentials_path
 
 control "ip-address-only" do
   title "Address module - dynamic IP address configuration"
@@ -34,7 +31,7 @@ control "ip-address-only" do
     describe command("gcloud compute addresses list --project #{project_id}  --format='json' --filter=address:#{ip_address}") do
       its('exit_status') { should be 0 }
       its('stderr') { should eq '' }
-  
+
       let(:attributes) do
         if subject.exit_status == 0
           JSON.parse(subject.stdout, symbolize_names: true)
@@ -42,7 +39,7 @@ control "ip-address-only" do
           {}
         end
       end
-  
+
       it "lists all reserved IP addresses" do
         expect(attributes.first).to include(
           name: "#{names[index]}"

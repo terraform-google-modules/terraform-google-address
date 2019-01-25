@@ -14,61 +14,20 @@
  * limitations under the License.
  */
 
-locals {
-  name         = "dns-forward-and-reverse"
-  reverse_name = "reverse"
-}
-
 provider "google" {
   credentials = "${file(var.credentials_path)}"
   project     = "${var.project_id}"
   region      = "${var.region}"
 }
 
-resource "google_compute_network" "default" {
-  name                    = "${local.name}"
-  auto_create_subnetworks = "false"
-}
-
-resource "google_compute_subnetwork" "default" {
-  name                     = "${local.name}"
-  ip_cidr_range            = "10.14.0.0/24"
-  network                  = "${google_compute_network.default.self_link}"
-  region                   = "${var.region}"
-  private_ip_google_access = true
-}
-
-resource "google_dns_managed_zone" "forward" {
-  name        = "${local.name}"
-  dns_name    = "${var.dns_domain}."
-  description = "DNS forward lookup zone example"
-}
-
-resource "google_dns_managed_zone" "reverse" {
-  name        = "${local.reverse_name}"
-  dns_name    = "14.10.in-addr.arpa."
-  description = "DNS reverse lookup zone example"
-}
-
 module "address" {
-  source             = "../../"
-  subnetwork         = "${google_compute_subnetwork.default.name}"
-  enable_cloud_dns   = "true"
-  enable_reverse_dns = "true"
-  dns_domain         = "${var.dns_domain}"
-  dns_managed_zone   = "${local.name}"
-  dns_reverse_zone   = "${local.reverse_name}"
-  dns_project        = "${var.project_id}"
-
-  names = [
-    "dynamically-reserved-ip-030",
-    "dynamically-reserved-ip-031",
-    "dynamically-reserved-ip-032",
-  ]
-
-  dns_short_names = [
-    "testip-031",
-    "testip-032",
-    "testip-033",
-  ]
+  source           = "../../"
+  subnetwork       = "${var.subnetwork}"
+  enable_cloud_dns = "true"
+  dns_domain       = "${var.dns_domain}"
+  dns_managed_zone = "${var.dns_managed_zone}"
+  dns_reverse_zone = "${var.dns_reverse_zone}"
+  dns_project      = "${var.dns_project}"
+  names            = "${var.names}"
+  dns_short_names  = "${var.dns_short_names}"
 }

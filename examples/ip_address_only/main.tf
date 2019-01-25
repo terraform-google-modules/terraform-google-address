@@ -14,31 +14,14 @@
  * limitations under the License.
  */
 
-locals {
-  name = "ip-address-only"
-}
-
 provider "google" {
   credentials = "${file(var.credentials_path)}"
   project     = "${var.project_id}"
   region      = "${var.region}"
 }
 
-resource "google_compute_network" "default" {
-  name                    = "${local.name}"
-  auto_create_subnetworks = "false"
-}
-
-resource "google_compute_subnetwork" "default" {
-  name                     = "${local.name}"
-  ip_cidr_range            = "10.11.0.0/24"
-  network                  = "${google_compute_network.default.self_link}"
-  region                   = "${var.region}"
-  private_ip_google_access = true
-}
-
 module "address" {
   source     = "../../"
-  subnetwork = "${google_compute_subnetwork.default.name}"
-  names      = ["dynamically-reserved-ip-001"]
+  subnetwork = "${var.subnetwork}"
+  names      = "${var.names}"
 }

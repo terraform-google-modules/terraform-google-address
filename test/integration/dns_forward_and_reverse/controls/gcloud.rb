@@ -13,12 +13,13 @@
 # limitations under the License.
 
 project_id        = attribute('project_id')
-region            = attribute('region')
 credentials_path  = attribute('credentials_path')
 addresses         = attribute('addresses')
 dns_fqdns         = attribute('dns_fqdns')
 reverse_dns_fqdns = attribute('reverse_dns_fqdns')
 names             = attribute('names')
+forward_zone      = attribute('forward_zone')
+reverse_zone      = attribute('reverse_zone')
 
 ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = File.absolute_path(
   credentials_path,
@@ -36,7 +37,7 @@ control "dns-forward-and-reverse" do
     describe command("gcloud compute addresses list --project #{project_id}  --format='json' --filter=address:#{ip_address}") do
       its('exit_status') { should be 0 }
       its('stderr') { should eq '' }
-  
+
       let(:attributes) do
         if subject.exit_status == 0
           JSON.parse(subject.stdout, symbolize_names: true)
@@ -44,7 +45,7 @@ control "dns-forward-and-reverse" do
           {}
         end
       end
-  
+
       it "lists all reserved IP addresses" do
         expect(attributes.first).to include(
           name: "#{names[index]}"
@@ -54,10 +55,10 @@ control "dns-forward-and-reverse" do
   end
 
   reverse_dns_fqdns.each_with_index do |reverse_fqdn, index|
-    describe command("gcloud dns record-sets list --project #{project_id} --zone=reverse --format='json' --filter=name:#{reverse_fqdn}.") do
+    describe command("gcloud dns record-sets list --project #{project_id} --zone=#{reverse_zone} --format='json' --filter=name:#{reverse_fqdn}.") do
       its('exit_status') { should be 0 }
       its('stderr') { should eq '' }
-  
+
       let(:attributes) do
         if subject.exit_status == 0
           JSON.parse(subject.stdout, symbolize_names: true)
@@ -65,7 +66,7 @@ control "dns-forward-and-reverse" do
           {}
         end
       end
-  
+
       it "matches the reverse DNS PTR record to the matching FQDN" do
         expect(attributes.first).to include(
           rrdatas: ["#{dns_fqdns[index]}."]
@@ -75,10 +76,10 @@ control "dns-forward-and-reverse" do
   end
 
   dns_fqdns.each_with_index do |fqdn, index|
-    describe command("gcloud dns record-sets list --project #{project_id} --zone=dns-forward-and-reverse --format='json' --filter=name:#{fqdn}") do
+    describe command("gcloud dns record-sets list --project #{project_id} --zone=#{forward_zone} --format='json' --filter=name:#{fqdn}") do
       its('exit_status') { should be 0 }
       its('stderr') { should eq '' }
-  
+
       let(:attributes) do
         if subject.exit_status == 0
           JSON.parse(subject.stdout, symbolize_names: true)
@@ -86,7 +87,7 @@ control "dns-forward-and-reverse" do
           {}
         end
       end
-  
+
       it "matches the FQDN to the correct IP address" do
         expect(attributes.first).to include(
           rrdatas: ["#{addresses[index]}"]

@@ -13,12 +13,11 @@
 # limitations under the License.
 
 project_id       = attribute('project_id')
-region           = attribute('region')
 credentials_path = attribute('credentials_path')
+addresses        = attribute('addresses')
+names            = attribute('names')
 
-ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = File.absolute_path(
-  credentials_path,
-  File.join(__dir__, "../../../../examples/ip_address_with_specific_ip"))
+ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = credentials_path
 
 control "ip-address-with-specific-ip" do
   title "Address module IP address only configuration"
@@ -28,20 +27,24 @@ control "ip-address-with-specific-ip" do
     its('stderr') { should eq '' }
   end
 
-  describe command("gcloud compute addresses list --project #{project_id} --format='json' --filter=name:statically-reserved-ip-001") do
-    its('exit_status') { should be 0 }
-    its('stderr') { should eq '' }
+  addresses.each_with_index do |ip_address, index|
+    describe command("gcloud compute addresses list --project #{project_id}  --format='json' --filter=address:#{ip_address}") do
+      its('exit_status') { should be 0 }
+      its('stderr') { should eq '' }
 
-    let(:attributes) do
-      if subject.exit_status == 0
-        JSON.parse(subject.stdout, symbolize_names: true)
-      else
-        {}
+      let(:attributes) do
+        if subject.exit_status == 0
+          JSON.parse(subject.stdout, symbolize_names: true)
+        else
+          {}
+        end
       end
-    end
 
-    it "lists a specific IP address" do
-      expect(attributes.first).to include(address: "10.12.0.110")
+      it "lists all reserved IP addresses" do
+        expect(attributes.first).to include(
+          name: "#{names[index]}"
+        )
+      end
     end
   end
 end

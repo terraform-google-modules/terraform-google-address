@@ -6,5 +6,8 @@ project_id       = "my-project-name"
 # create resources via Terraform
 credentials_path = "/path/to/credentials.json"
 
-# The domain name to be used for the example
-dns_domain       = "gcpexample.org"
+# Subnetwork where the IP Address will be reserved
+subnetwork       = ""
+
+# List of GCP resource names for each IP address desired
+names            = [""]

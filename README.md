@@ -1,4 +1,4 @@
-# [Google Address Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/addres/google/)
+# [Google Address Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/address/google/)
 
 This terraform module provides the means to permanently reserve an [IP address](https://cloud.google.com/compute/docs/ip-addresses/)
 available to Google Cloud Platform (GCP) resources, and optionally create
@@ -150,6 +150,26 @@ module "address-fe" {
 As with the non-DNS examples above, the `addresses` input variable can be
 provided with a list of specific IP addresses to be reserved if desired.
 
+## Input variables that cannot contain computed values
+
+Because of the way the module is structured, and due to the fact that
+Terraform doesn't yet support computed count values, there are certain input
+variables whose values cannot be computed values. The list of those input
+variables is as follows:
+
+```
+var.dns_domain
+var.dns_short_names
+var.enable_cloud_dns
+var.enable_reverse_dns
+var.global
+var.names
+```
+
+You must currently use literal values for these input variables. If you
+don't you run the risk of failing validation (at the least) or surfacing the
+dreaded `value of 'count' cannot be computed` error. Future versions of
+Terraform may change this fact, but this is the current limitation.
 
 [^]: (autogen_docs_start)
 

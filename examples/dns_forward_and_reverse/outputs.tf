@@ -33,3 +33,13 @@ output "reverse_dns_fqdns" {
   description = "List of reverse DNS PTR records registered in Cloud DNS."
   value       = ["${module.address.reverse_dns_fqdns}"]
 }
+
+output "forward_zone" {
+  description = "The GCP name of the forward lookup DNS zone being used"
+  value       = "${var.dns_managed_zone}"
+}
+
+output "reverse_zone" {
+  description = "The GCP name of the reverse lookup DNS zone being used"
+  value       = "${var.dns_reverse_zone}"
+}

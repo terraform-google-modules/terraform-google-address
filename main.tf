@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ locals {
   dns_fqdns                = "${formatlist("%s.%s", var.dns_short_names, var.dns_domain)}"
   regional_addresses_count = "${var.global ? 0 : length(var.names)}"
   global_addresses_count   = "${var.global ? length(var.names) : 0}"
+  dns_forward_record_count = "${var.enable_cloud_dns != "" ? length(local.dns_fqdns) : 0}"
+  dns_reverse_record_count = "${var.enable_reverse_dns != "" ? length(local.dns_fqdns) : 0}"
   ip_addresses             = "${concat(google_compute_address.ip.*.address, google_compute_global_address.global_ip.*.address)}"
   ip_names                 = "${concat(google_compute_address.ip.*.name, google_compute_global_address.global_ip.*.name)}"
   dns_ptr_fqdns            = "${data.template_file.ptrs.*.rendered}"
@@ -74,8 +76,7 @@ resource "google_compute_global_address" "global_ip" {
   Forward and reverse DNS entries - note the trailing dot in name
  *****************************************/
 resource "google_dns_record_set" "ip" {
-  count = "${var.enable_cloud_dns != "" ? length(local.dns_fqdns) : 0}"
-
+  count        = "${local.dns_forward_record_count}"
   name         = "${element(local.dns_fqdns, count.index)}."
   managed_zone = "${var.dns_managed_zone}"
   type         = "${var.dns_record_type}"
@@ -85,8 +86,7 @@ resource "google_dns_record_set" "ip" {
 }
 
 resource "google_dns_record_set" "ptr" {
-  count = "${var.enable_reverse_dns != "" ? length(local.dns_fqdns) : 0}"
-
+  count        = "${local.dns_reverse_record_count}"
   name         = "${element(local.dns_ptr_fqdns, count.index)}."
   managed_zone = "${var.dns_reverse_zone}"
   type         = "PTR"

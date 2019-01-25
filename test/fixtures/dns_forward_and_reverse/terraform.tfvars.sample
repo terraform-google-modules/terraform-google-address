@@ -1,4 +1,0 @@
-credentials_path = "../../credentials.json"
-region           = "us-west1"
-project_id       = ""
-dns_domain       = "gcpexample.org"
