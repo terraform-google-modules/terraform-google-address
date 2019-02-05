@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-output "region" {
-  description = "Region being used"
-  value       = "${var.region}"
+variable "project_id" {
+  description = "The project ID to deploy to"
 }
 
-output "credentials_path" {
-  description = "Path to credentials file being used"
-  value       = "${var.credentials_path}"
+variable "credentials_path" {
+  description = "The path tory to the GCP credentials file that will run Terraform tests"
 }
 
-output "project_id" {
-  description = "ID of the project being used"
-  value       = "${var.project_id}"
+variable "region" {
+  description = "The region to deploy to"
 }

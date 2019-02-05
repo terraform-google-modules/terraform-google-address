@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,52 +14,19 @@
  * limitations under the License.
  */
 
-locals {
-  name = "dns-forward-example"
-}
-
 provider "google" {
   credentials = "${file(var.credentials_path)}"
   project     = "${var.project_id}"
   region      = "${var.region}"
 }
 
-resource "google_compute_network" "default" {
-  name                    = "${local.name}"
-  auto_create_subnetworks = "false"
-}
-
-resource "google_compute_subnetwork" "default" {
-  name                     = "${local.name}"
-  ip_cidr_range            = "10.13.0.0/24"
-  network                  = "${google_compute_network.default.self_link}"
-  region                   = "${var.region}"
-  private_ip_google_access = true
-}
-
-resource "google_dns_managed_zone" "forward" {
-  name        = "${local.name}"
-  dns_name    = "${var.dns_domain}."
-  description = "DNS forward lookup zone example"
-}
-
 module "address" {
   source           = "../../"
-  subnetwork       = "${google_compute_subnetwork.default.name}"
+  subnetwork       = "${var.subnetwork}"
   enable_cloud_dns = "true"
   dns_domain       = "${var.dns_domain}"
-  dns_managed_zone = "${local.name}"
-  dns_project      = "${var.project_id}"
-
-  names = [
-    "dynamically-reserved-ip-020",
-    "dynamically-reserved-ip-021",
-    "dynamically-reserved-ip-022",
-  ]
-
-  dns_short_names = [
-    "testip-021",
-    "testip-022",
-    "testip-023",
-  ]
+  dns_managed_zone = "${var.dns_managed_zone}"
+  dns_project      = "${var.dns_project}"
+  names            = "${var.names}"
+  dns_short_names  = "${var.dns_short_names}"
 }

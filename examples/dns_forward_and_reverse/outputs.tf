@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,4 +32,14 @@ output "dns_fqdns" {
 output "reverse_dns_fqdns" {
   description = "List of reverse DNS PTR records registered in Cloud DNS."
   value       = ["${module.address.reverse_dns_fqdns}"]
+}
+
+output "forward_zone" {
+  description = "The GCP name of the forward lookup DNS zone being used"
+  value       = "${var.dns_managed_zone}"
+}
+
+output "reverse_zone" {
+  description = "The GCP name of the reverse lookup DNS zone being used"
+  value       = "${var.dns_reverse_zone}"
 }

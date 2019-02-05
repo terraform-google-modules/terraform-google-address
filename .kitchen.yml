@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,30 +34,22 @@ suites:
     driver:
       name: "terraform"
       command_timeout: 1800
-      root_module_directory: examples/ip_address_only
-      variable_files:
-        - test/fixtures/ip_address_only/terraform.tfvars
+      root_module_directory: test/fixtures/ip_address_only
 
   - name: "ip_address_with_specific_ip"
     driver:
       name: "terraform"
       command_timeout: 1800
-      root_module_directory: examples/ip_address_with_specific_ip
-      variable_files:
-        - test/fixtures/ip_address_with_specific_ip/terraform.tfvars
+      root_module_directory: test/fixtures/ip_address_with_specific_ip
 
   - name: "dns_forward_example"
     driver:
       name: "terraform"
       command_timeout: 1800
-      root_module_directory: examples/dns_forward_example
-      variable_files:
-        - test/fixtures/dns_forward_example/terraform.tfvars
+      root_module_directory: test/fixtures/dns_forward_example
 
   - name: "dns_forward_and_reverse"
     driver:
       name: "terraform"
       command_timeout: 1800
-      root_module_directory: examples/dns_forward_and_reverse
-      variable_files:
-        - test/fixtures/dns_forward_and_reverse/terraform.tfvars
+      root_module_directory: test/fixtures/dns_forward_and_reverse

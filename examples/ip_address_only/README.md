@@ -12,8 +12,10 @@ itself as well as the resource name that corresponds.
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | credentials_path | The path to a Google Cloud Service Account credentials file | string | - | yes |
+| names | A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"]) | list | - | yes |
 | project_id | The project ID to deploy to | string | - | yes |
 | region | The region to deploy to | string | - | yes |
+| subnetwork | The subnetwork on which the IP address will be reserved | string | - | yes |
 
 ## Outputs
 

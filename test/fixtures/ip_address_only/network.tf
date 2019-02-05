@@ -1,0 +1,1 @@
+../shared/no_dns/network.tfshared
