@@ -41,7 +41,7 @@ control "ip-address-with-specific-ip" do
       end
 
       it "lists all reserved IP addresses" do
-        expect(attributes.first).to include(
+        expect(attributes).to include(
           name: "#{names[index]}"
         )
       end
