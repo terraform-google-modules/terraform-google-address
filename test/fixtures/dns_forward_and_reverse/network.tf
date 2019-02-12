@@ -15,11 +15,10 @@
  */
 
 locals {
-  credentials_path = "${path.module}/${var.credentials_path}"
-  randomized_name  = "cft-address-test-${random_string.suffix.result}"
-  domain           = "justfortesting.local"
-  forward_zone     = "forward-cft-address-test"
-  reverse_zone     = "reverse-cft-address-test"
+  randomized_name = "cft-address-test-${random_string.suffix.result}"
+  domain          = "justfortesting.local"
+  forward_zone    = "forward-cft-address-test"
+  reverse_zone    = "reverse-cft-address-test"
 }
 
 resource "random_string" "suffix" {
@@ -29,8 +28,7 @@ resource "random_string" "suffix" {
 }
 
 provider "google" {
-  credentials = "${file(local.credentials_path)}"
-  project     = "${var.project_id}"
+  project = "${var.project_id}"
 }
 
 resource "google_compute_network" "main" {

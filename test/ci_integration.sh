@@ -34,10 +34,33 @@ finish() {
   echo 'END: finish() trap handler' >&2
 }
 
+# Map the input parameters provided by Concourse CI, or whatever mechanism is
+# running the tests to Terraform input variables.  Also setup credentials for
+# use with kitchen-terraform, inspec, and gcloud.
+setup_environment() {
+  local tmpfile
+  tmpfile="$(mktemp)"
+  echo "${SERVICE_ACCOUNT_JSON}" > "${tmpfile}"
+
+  # Terraform and most other tools respect GOOGLE_CREDENTIALS
+  export GOOGLE_CREDENTIALS="${SERVICE_ACCOUNT_JSON}"
+  # gcloud variables
+  export CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE="${tmpfile}"
+  export CLOUDSDK_CORE_PROJECT="${PROJECT_ID}"
+
+  # Terraform input variables
+  export TF_VAR_project_id="${PROJECT_ID}"
+  export TF_VAR_region="${REGION:-us-east4}"
+}
+
 main() {
   set -eu
   # Setup trap handler to auto-cleanup
+  export TMPDIR="${DELETE_AT_EXIT}"
   trap finish EXIT
+
+  # Setup environment
+  setup_environment
   set -x
   # Execute the test lifecycle
   bundle install

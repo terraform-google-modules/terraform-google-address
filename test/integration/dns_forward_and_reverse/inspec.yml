@@ -22,10 +22,6 @@ attributes:
     required: true
     type: string
 
-  - name: credentials_path
-    required: true
-    type: string
-
   - name: addresses
     required: true
     type: array

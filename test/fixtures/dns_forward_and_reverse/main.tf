@@ -18,7 +18,6 @@ module "example" {
   source           = "../../../examples/dns_forward_and_reverse"
   project_id       = "${var.project_id}"
   region           = "${var.region}"
-  credentials_path = "${local.credentials_path}"
   subnetwork       = "${google_compute_subnetwork.main.name}"
   dns_project      = "${var.project_id}"
   dns_domain       = "${local.domain}"

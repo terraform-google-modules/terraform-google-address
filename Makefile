@@ -78,14 +78,7 @@ check_headers:
 # Integration tests
 .PHONY: test_integration
 test_integration:
-	source ${TEST_CONFIG_FILE_LOCATION}
-	bundle install
-	bundle exec kitchen create
-	bundle exec kitchen converge
-	bundle exec kitchen converge
-	@echo "Waiting ${GCE_INSTANCE_INIT_WAIT_TIME} seconds for load balancer to come online..."
-	bundle exec kitchen verify
-	bundle exec kitchen destroy
+	./test/ci_integration.sh
 
 .PHONY: generate_docs
 generate_docs:

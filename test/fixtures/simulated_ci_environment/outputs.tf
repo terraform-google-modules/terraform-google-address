@@ -13,19 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-provider "google" {
-  project = "${var.project_id}"
-  region  = "${var.region}"
-}
-
-module "address" {
-  source           = "../../"
-  subnetwork       = "${var.subnetwork}"
-  enable_cloud_dns = "true"
-  dns_domain       = "${var.dns_domain}"
-  dns_managed_zone = "${var.dns_managed_zone}"
-  dns_project      = "${var.dns_project}"
-  names            = "${var.names}"
-  dns_short_names  = "${var.dns_short_names}"
+output "service_account_private_key" {
+  description = "The SA KEY JSON content.  Store in GOOGLE_CREDENTIALS."
+  value       = "${base64decode(google_service_account_key.address.private_key)}"
 }

@@ -2,10 +2,6 @@
 region           = "us-west1"
 project_id       = "my-project-name"
 
-# Path to the credentials file of an account with sufficient access to
-# create resources via Terraform
-credentials_path = "/path/to/credentials.json"
-
 # Subnetwork where the IP Address will be reserved
 subnetwork       = ""
 
