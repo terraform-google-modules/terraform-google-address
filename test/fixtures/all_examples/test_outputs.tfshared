@@ -19,11 +19,6 @@ output "region" {
   value       = "${var.region}"
 }
 
-output "credentials_path" {
-  description = "Path to credentials file being used"
-  value       = "${var.credentials_path}"
-}
-
 output "project_id" {
   description = "ID of the project being used"
   value       = "${var.project_id}"

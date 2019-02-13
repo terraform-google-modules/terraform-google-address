@@ -13,11 +13,8 @@
 # limitations under the License.
 
 project_id       = attribute('project_id')
-credentials_path = attribute('credentials_path')
 addresses        = attribute('addresses')
 names            = attribute('names')
-
-ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = credentials_path
 
 control "ip-address-with-specific-ip" do
   title "Address module IP address only configuration"

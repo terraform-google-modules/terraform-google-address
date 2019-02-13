@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-provider "google" {
-  project = "${var.project_id}"
-  region  = "${var.region}"
+variable "region" {
+  description = "The region to deploy to"
 }
 
-module "address" {
-  source           = "../../"
-  subnetwork       = "${var.subnetwork}"
-  enable_cloud_dns = "true"
-  dns_domain       = "${var.dns_domain}"
-  dns_managed_zone = "${var.dns_managed_zone}"
-  dns_project      = "${var.dns_project}"
-  names            = "${var.names}"
-  dns_short_names  = "${var.dns_short_names}"
+variable "organization_id" {
+  description = "The numeric organization id"
+  type        = "string"
+}
+
+variable "folder_id" {
+  description = "The numeric folder id to create resources"
+  type        = "string"
+}
+
+variable "billing_account" {
+  description = "The billing account id associated with the project, e.g. XXXXXX-YYYYYY-ZZZZZZ"
+  type        = "string"
 }

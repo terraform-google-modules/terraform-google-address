@@ -18,10 +18,6 @@ attributes:
     required: true
     type: string
 
-  - name: credentials_path
-    required: true
-    type: string
-
   - name: names
     required: true
     type: array

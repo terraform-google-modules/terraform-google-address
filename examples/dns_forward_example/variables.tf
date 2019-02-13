@@ -18,10 +18,6 @@ variable "project_id" {
   description = "The project ID to deploy to"
 }
 
-variable "credentials_path" {
-  description = "The path to a Google Cloud Service Account credentials file"
-}
-
 variable "dns_domain" {
   description = "The name of the domain to be registered with Cloud DNS"
 }

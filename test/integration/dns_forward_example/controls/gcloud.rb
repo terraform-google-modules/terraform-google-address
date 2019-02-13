@@ -13,13 +13,10 @@
 # limitations under the License.
 
 project_id       = attribute('project_id')
-credentials_path = attribute('credentials_path')
 addresses        = attribute('addresses')
 dns_fqdns        = attribute('dns_fqdns')
 names            = attribute('names')
 forward_zone     = attribute('forward_zone')
-
-ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = credentials_path
 
 control "dns-forward-example" do
   title "Address module - DNS example with forward lookup registration"

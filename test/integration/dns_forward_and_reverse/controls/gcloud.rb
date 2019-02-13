@@ -13,17 +13,12 @@
 # limitations under the License.
 
 project_id        = attribute('project_id')
-credentials_path  = attribute('credentials_path')
 addresses         = attribute('addresses')
 dns_fqdns         = attribute('dns_fqdns')
 reverse_dns_fqdns = attribute('reverse_dns_fqdns')
 names             = attribute('names')
 forward_zone      = attribute('forward_zone')
 reverse_zone      = attribute('reverse_zone')
-
-ENV['CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE'] = File.absolute_path(
-  credentials_path,
-  File.join(__dir__, "../../../../examples/dns_forward_and_reverse"))
 
 control "dns-forward-and-reverse" do
   title "Address module - DNS example with forward and reverse lookup registration"
