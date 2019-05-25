@@ -15,12 +15,12 @@
  */
 
 provider "google" {
-  project = "${var.project_id}"
-  region  = "${var.region}"
+  region = "${var.region}"
 }
 
 module "address" {
   source           = "../../"
+  project_id       = "${var.project_id}"
   subnetwork       = "${var.subnetwork}"
   enable_cloud_dns = "true"
   dns_domain       = "${var.dns_domain}"

@@ -15,12 +15,12 @@
  */
 
 provider "google" {
-  project = "${var.project_id}"
-  region  = "${var.region}"
+  region = "${var.region}"
 }
 
 module "address" {
   source     = "../../"
+  project_id = "${var.project_id}"
   subnetwork = "${var.subnetwork}"
   names      = "${var.names}"
 }
