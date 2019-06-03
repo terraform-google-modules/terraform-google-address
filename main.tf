@@ -61,6 +61,7 @@ data "template_file" "ptrs" {
  *****************************************/
 resource "google_compute_address" "ip" {
   count        = "${local.regional_addresses_count}"
+  project      = "${var.project_id}"
   name         = "${element(var.names, count.index)}"
   address      = "${element(var.addresses, count.index)}"
   subnetwork   = "${var.subnetwork}"
@@ -68,8 +69,9 @@ resource "google_compute_address" "ip" {
 }
 
 resource "google_compute_global_address" "global_ip" {
-  count = "${local.global_addresses_count}"
-  name  = "${element(var.names, count.index)}"
+  count   = "${local.global_addresses_count}"
+  project = "${var.project_id}"
+  name    = "${element(var.names, count.index)}"
 }
 
 /******************************************
