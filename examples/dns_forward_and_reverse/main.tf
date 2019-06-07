@@ -21,6 +21,7 @@ provider "google" {
 module "address" {
   source           = "../../"
   project_id       = "${var.project_id}"
+  region           = "${var.region}"
   subnetwork       = "${var.subnetwork}"
   enable_cloud_dns = "true"
   dns_domain       = "${var.dns_domain}"

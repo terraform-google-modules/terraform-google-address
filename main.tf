@@ -62,6 +62,7 @@ data "template_file" "ptrs" {
 resource "google_compute_address" "ip" {
   count        = "${local.regional_addresses_count}"
   project      = "${var.project_id}"
+  region       = "${var.region}"
   name         = "${element(var.names, count.index)}"
   address      = "${element(var.addresses, count.index)}"
   subnetwork   = "${var.subnetwork}"
