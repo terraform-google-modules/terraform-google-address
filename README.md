@@ -191,6 +191,7 @@ Terraform may change this fact, but this is the current limitation.
 | global | The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork. | string | `"false"` | no |
 | names | A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"]) | list | `<list>` | no |
 | project\_id | The project ID to create the address in | string | n/a | yes |
+| region | The region to create the address in | string | n/a | yes |
 | subnetwork | The subnet containing the address.  For EXTERNAL addresses use the empty string, "".  (e.g. "projects/<project-name>/regions/<region-name>/subnetworks/<subnetwork-name>") | string | `""` | no |
 
 ## Outputs
