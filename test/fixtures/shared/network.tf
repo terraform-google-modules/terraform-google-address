@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-variable "region" {
-  type        = string
-  description = "The region to deploy to"
+resource "random_string" "suffix" {
+  length  = 4
+  special = "false"
+  upper   = "false"
 }
 
-variable "organization_id" {
-  description = "The numeric organization id"
-  type        = string
+resource "google_compute_network" "main" {
+  project                 = "${var.project_id}"
+  name                    = "cft-vm-test-${random_string.suffix.result}"
+  auto_create_subnetworks = "false"
 }
 
-variable "folder_id" {
-  description = "The numeric folder id to create resources"
-  type        = string
+resource "google_compute_subnetwork" "main" {
+  project       = "${var.project_id}"
+  region        = "us-central1"
+  name          = "cft-vm-test-${random_string.suffix.result}"
+  ip_cidr_range = "10.128.0.0/20"
+  network       = "${google_compute_network.main.self_link}"
 }
-
-variable "billing_account" {
-  description = "The billing account id associated with the project, e.g. XXXXXX-YYYYYY-ZZZZZZ"
-  type        = string
-}
-

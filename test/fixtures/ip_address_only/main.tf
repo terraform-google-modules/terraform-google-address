@@ -16,8 +16,9 @@
 
 module "example" {
   source     = "../../../examples/ip_address_only"
-  project_id = "${var.project_id}"
-  region     = "${var.region}"
-  subnetwork = "${google_compute_subnetwork.main.name}"
+  project_id = var.project_id
+  region     = var.region
+  subnetwork = google_compute_subnetwork.main.name
   names      = ["dynamically-assigned-ip-001"]
 }
+

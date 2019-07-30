@@ -15,9 +15,10 @@
  */
 
 output "project_id" {
-  value = "${var.project_id}"
+  value = var.project_id
 }
 
 output "region" {
-  value = "${module.example.region}"
+  value = module.example.region
 }
+

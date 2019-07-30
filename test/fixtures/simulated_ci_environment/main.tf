@@ -15,7 +15,7 @@
  */
 
 provider "google" {
-  project = "${local.project_id}"
+  project = local.project_id
 }
 
 locals {
@@ -36,32 +36,33 @@ locals {
 }
 
 resource "google_project" "address" {
-  name            = "${local.project_id}"
-  project_id      = "${local.project_id}"
-  folder_id       = "${var.folder_id}"
-  billing_account = "${var.billing_account}"
+  name            = local.project_id
+  project_id      = local.project_id
+  folder_id       = var.folder_id
+  billing_account = var.billing_account
 }
 
 resource "google_project_service" "address" {
-  count              = "${length(local.services)}"
-  project            = "${google_project.address.id}"
-  service            = "${element(local.services, count.index)}"
-  disable_on_destroy = "true"
+  count              = length(local.services)
+  project            = google_project.address.id
+  service            = element(local.services, count.index)
+  disable_on_destroy = true
 }
 
 resource "google_service_account" "address" {
-  project      = "${google_project.address.id}"
+  project      = google_project.address.id
   account_id   = "ci-address"
   display_name = "ci-address"
 }
 
 resource "google_project_iam_member" "address" {
-  count   = "${length(local.required_service_account_project_roles)}"
-  project = "${google_project.address.id}"
-  role    = "${element(local.required_service_account_project_roles, count.index)}"
+  count   = length(local.required_service_account_project_roles)
+  project = google_project.address.id
+  role    = element(local.required_service_account_project_roles, count.index)
   member  = "serviceAccount:${google_service_account.address.email}"
 }
 
 resource "google_service_account_key" "address" {
-  service_account_id = "${google_service_account.address.id}"
+  service_account_id = google_service_account.address.id
 }
+

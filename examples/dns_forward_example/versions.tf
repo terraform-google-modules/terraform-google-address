@@ -14,23 +14,6 @@
  * limitations under the License.
  */
 
-variable "region" {
-  type        = string
-  description = "The region to deploy to"
+terraform {
+  required_version = ">= 0.12"
 }
-
-variable "organization_id" {
-  description = "The numeric organization id"
-  type        = string
-}
-
-variable "folder_id" {
-  description = "The numeric folder id to create resources"
-  type        = string
-}
-
-variable "billing_account" {
-  description = "The billing account id associated with the project, e.g. XXXXXX-YYYYYY-ZZZZZZ"
-  type        = string
-}
-

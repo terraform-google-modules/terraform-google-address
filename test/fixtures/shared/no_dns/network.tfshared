@@ -21,7 +21,7 @@ resource "random_string" "suffix" {
 }
 
 provider "google" {
-  project = "${var.project_id}"
+  project = var.project_id
 }
 
 resource "google_compute_network" "main" {
@@ -32,7 +32,8 @@ resource "google_compute_network" "main" {
 resource "google_compute_subnetwork" "main" {
   name                     = "cft-address-test-${random_string.suffix.result}"
   ip_cidr_range            = "10.13.0.0/24"
-  region                   = "${var.region}"
+  region                   = var.region
   private_ip_google_access = true
-  network                  = "${google_compute_network.main.self_link}"
+  network                  = google_compute_network.main.self_link
 }
+

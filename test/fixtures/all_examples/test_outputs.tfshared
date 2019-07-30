@@ -16,10 +16,11 @@
 
 output "region" {
   description = "Region being used"
-  value       = "${var.region}"
+  value       = var.region
 }
 
 output "project_id" {
   description = "ID of the project being used"
-  value       = "${var.project_id}"
+  value       = var.project_id
 }
+
