@@ -31,5 +31,5 @@ resource "google_compute_subnetwork" "main" {
   region        = "us-central1"
   name          = "cft-vm-test-${random_string.suffix.result}"
   ip_cidr_range = "10.128.0.0/20"
-  network       = "${google_compute_network.main.self_link}"
+  network       = google_compute_network.main.self_link
 }
