@@ -32,7 +32,7 @@ provider "google" {
 
 resource "google_compute_network" "main" {
   name                    = local.randomized_name
-  auto_create_subnetworks = "false"
+  auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "main" {
