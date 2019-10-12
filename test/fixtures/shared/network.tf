@@ -17,7 +17,7 @@
 resource "random_string" "suffix" {
   length  = 4
   special = false
-  upper   = "false"
+  upper   = false
 }
 
 resource "google_compute_network" "main" {
