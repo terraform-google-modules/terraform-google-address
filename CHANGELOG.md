@@ -31,4 +31,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
         - Forward and Reverse lookup zones are supported
 
 [Unreleased]: https://github.com/terraform-google-modules/terraform-google-address/compare/v1.0.0...HEAD
-[10]: https://github.com/terraform-google-modules/terraform-google-address/pull/10
+[#10]: https://github.com/terraform-google-modules/terraform-google-address/pull/10

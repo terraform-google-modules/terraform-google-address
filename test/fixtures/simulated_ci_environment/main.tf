@@ -45,7 +45,7 @@ resource "google_project" "address" {
 resource "google_project_service" "address" {
   count              = length(local.services)
   project            = google_project.address.id
-  service            = element(local.services, count.index)
+  service            = local.services[count.index]
   disable_on_destroy = true
 }
 
@@ -58,7 +58,7 @@ resource "google_service_account" "address" {
 resource "google_project_iam_member" "address" {
   count   = length(local.required_service_account_project_roles)
   project = google_project.address.id
-  role    = element(local.required_service_account_project_roles, count.index)
+  role    = local.required_service_account_project_roles[count.index]
   member  = "serviceAccount:${google_service_account.address.email}"
 }
 
