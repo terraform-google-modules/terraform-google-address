@@ -7,7 +7,9 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- Added support for Terraform 0.12 [10]
+### Changed
+
+- The supported version of Terraform is 0.12. [#10]
 
 ## [v1.0.0](https://github.com/terraform-google-modules/terraform-google-address/releases/tag/v1.0.0) 2019-06-08
 
