@@ -46,6 +46,7 @@ variable "dns_short_names" {
 
 variable "dns_managed_zone" {
   description = "The name of the managed zone to create records within.  This managed zone must exist in the host project."
+  type        = string
 }
 
 variable "dns_reverse_zone" {
