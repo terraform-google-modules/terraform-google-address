@@ -27,7 +27,7 @@ resource "google_compute_network" "main" {
 }
 
 resource "google_compute_subnetwork" "main" {
-  project       = "${var.project_id}"
+  project       = var.project_id
   region        = "us-central1"
   name          = "cft-vm-test-${random_string.suffix.result}"
   ip_cidr_range = "10.128.0.0/20"
