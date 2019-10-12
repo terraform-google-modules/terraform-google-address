@@ -23,7 +23,7 @@ resource "random_string" "suffix" {
 resource "google_compute_network" "main" {
   project                 = "${var.project_id}"
   name                    = "cft-vm-test-${random_string.suffix.result}"
-  auto_create_subnetworks = "false"
+  auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "main" {
