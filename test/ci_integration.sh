@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,8 +30,7 @@ finish() {
   # take care of the zone entries (which will produce an error), and a second
   # time to get rid of the zone.
   set +e
-  bundle exec kitchen destroy
-  bundle exec kitchen destroy
+  kitchen destroy
   [[ -d "${DELETE_AT_EXIT}" ]] && rm -rf "${DELETE_AT_EXIT}"
   echo 'END: finish() trap handler' >&2
 }
@@ -54,20 +55,23 @@ setup_environment() {
 }
 
 main() {
+  export SUITE="${SUITE:-}"
+
   set -eu
   # Setup trap handler to auto-cleanup
   export TMPDIR="${DELETE_AT_EXIT}"
   trap finish EXIT
 
-  # Setup environment
+  # Setup environment variables
   setup_environment
   set -x
+
   # Execute the test lifecycle
-  bundle install
-  bundle exec kitchen create
-  bundle exec kitchen converge
-  bundle exec kitchen converge
-  bundle exec kitchen verify
+  kitchen create "$SUITE"
+  kitchen converge "$SUITE"
+  kitchen verify "$SUITE"
+  kitchen destroy "$SUITE"
+  kitchen destroy "$SUITE"
 }
 
 # if script is being executed and not sourced.

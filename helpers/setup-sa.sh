@@ -46,12 +46,12 @@ KEY_FILE="${STAGING_DIR}/credentials.json"
 
 echo "Creating service account..."
 gcloud iam service-accounts \
-    --project ${HOST_PROJECT} create ${SA_NAME} \
-    --display-name ${SA_NAME}
+    --project "${HOST_PROJECT}" create "${SA_NAME}" \
+    --display-name "${SA_NAME}"
 
 echo "Downloading key to credentials.json..."
-gcloud iam service-accounts keys create ${KEY_FILE} \
-    --iam-account ${SA_ID} \
+gcloud iam service-accounts keys create "${KEY_FILE}" \
+    --iam-account "${SA_ID}" \
     --user-output-enabled false
 
 # Grant roles/dns.admin to the service account on the host project
@@ -76,4 +76,4 @@ gcloud services enable \
   cloudresourcemanager.googleapis.com \
   compute.googleapis.com \
   dns.googleapis.com \
-  --project ${HOST_PROJECT}
+  --project "${HOST_PROJECT}"

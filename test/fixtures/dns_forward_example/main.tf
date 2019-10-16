@@ -16,12 +16,12 @@
 
 module "example" {
   source           = "../../../examples/dns_forward_example"
-  project_id       = "${var.project_id}"
-  region           = "${var.region}"
-  subnetwork       = "${google_compute_subnetwork.main.name}"
-  dns_project      = "${var.project_id}"
-  dns_domain       = "${local.domain}"
-  dns_managed_zone = "${local.forward_zone}"
+  project_id       = var.project_id
+  region           = var.region
+  subnetwork       = google_compute_subnetwork.main.name
+  dns_project      = var.project_id
+  dns_domain       = local.domain
+  dns_managed_zone = local.forward_zone
 
   names = [
     "dynamically-reserved-ip-020",
@@ -35,3 +35,4 @@ module "example" {
     "testip-023",
   ]
 }
+

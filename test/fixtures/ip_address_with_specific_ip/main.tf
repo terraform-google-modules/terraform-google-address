@@ -16,9 +16,10 @@
 
 module "example" {
   source     = "../../../examples/ip_address_with_specific_ip"
-  project_id = "${var.project_id}"
-  region     = "${var.region}"
-  subnetwork = "${google_compute_subnetwork.main.name}"
+  project_id = var.project_id
+  region     = var.region
+  subnetwork = google_compute_subnetwork.main.name
   addresses  = ["10.13.0.100"]
   names      = ["statically-reserved-ip-001"]
 }
+

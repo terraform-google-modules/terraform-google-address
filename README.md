@@ -6,6 +6,12 @@ forward and reverse entries within Google Cloud DNS. The intent is to provide an
 address resource which exists independent of the lifecycle of the resources
 that require the address.
 
+## Compatibility
+
+ This module is meant for use with Terraform 0.12. If you haven't [upgraded](https://www.terraform.io/upgrade-guides/0-12.html)
+  and need a Terraform 0.11.x-compatible version of this module, the last released version intended for
+  Terraform 0.11.x is [1.0.0](https://registry.terraform.io/modules/terraform-google-modules/address/google/1.0.0).
+
 
 # Usage
 
@@ -248,7 +254,7 @@ NOTE: These APIs are enabled by default on the host project passed in to the `./
 ## Install
 
 ### Terraform
-Be sure you have the correct Terraform version (0.11.x), you can choose the binary here:
+Be sure you have the correct Terraform version (0.12.x), you can choose the binary here:
 - https://releases.hashicorp.com/terraform/
 
 ## File structure
@@ -335,7 +341,6 @@ Running shellcheck
 Running flake8
 Running gofmt
 Running terraform validate
-Running hadolint on Dockerfiles
 Test passed - Verified all file Apache 2 headers
 ```
 
@@ -347,4 +352,3 @@ are as follows:
 is a compiled language so there is no standard linter.
 * Terraform - terraform has a built-in linter in the 'terraform validate'
 command.
-* Dockerfiles - hadolint. Can be found in homebrew

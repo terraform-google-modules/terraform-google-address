@@ -28,30 +28,31 @@ resource "random_string" "suffix" {
 }
 
 provider "google" {
-  project = "${var.project_id}"
+  project = var.project_id
 }
 
 resource "google_compute_network" "main" {
-  name                    = "${local.randomized_name}"
-  auto_create_subnetworks = "false"
+  name                    = local.randomized_name
+  auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "main" {
-  name                     = "${local.randomized_name}"
+  name                     = local.randomized_name
   ip_cidr_range            = "10.10.0.0/24"
-  region                   = "${var.region}"
+  region                   = var.region
   private_ip_google_access = true
-  network                  = "${google_compute_network.main.self_link}"
+  network                  = google_compute_network.main.self_link
 }
 
 resource "google_dns_managed_zone" "forward" {
-  name        = "${local.forward_zone}"
+  name        = local.forward_zone
   dns_name    = "${local.domain}."
   description = "DNS forward lookup zone example"
 }
 
 resource "google_dns_managed_zone" "reverse" {
-  name        = "${local.reverse_zone}"
+  name        = local.reverse_zone
   dns_name    = "10.10.in-addr.arpa."
   description = "DNS reverse lookup zone example"
 }
+
