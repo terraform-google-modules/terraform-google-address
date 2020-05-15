@@ -208,6 +208,7 @@ Terraform may change this fact, but this is the current limitation.
 | dns\_fqdns | List of DNS fully qualified domain names registered in Cloud DNS.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001.example.com", "gusw1-dev-fooapp-fe-0001-a-0002.example.com"]) |
 | names | List of address resource names managed by this module (e.g. ["gusw1-dev-fooapp-fe-0001-a-0001-ip"]) |
 | reverse\_dns\_fqdns | List of reverse DNS PTR records registered in Cloud DNS.  (e.g. ["1.2.11.10.in-addr.arpa", "2.2.11.10.in-addr.arpa"]) |
+| self\_links | List of URIs of the created address resources (e.g. ["https://www.googleapis.com/compute/v1/projects/project-abcde/regions/europe-west1/addresses/gusw1-dev-fooapp-fe-0001-a-0001-ip"] |
 
 [^]: (autogen_docs_end)
 

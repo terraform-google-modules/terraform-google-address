@@ -24,6 +24,11 @@ output "names" {
   value       = local.ip_names
 }
 
+output "self_links" {
+  description = "List of URIs of the created address resources"
+  value       = local.self_links
+}
+
 output "dns_fqdns" {
   description = "List of DNS fully qualified domain names registered in Cloud DNS.  (e.g. [\"gusw1-dev-fooapp-fe-0001-a-001.example.com\", \"gusw1-dev-fooapp-fe-0001-a-0002.example.com\"])"
   value       = local.dns_fqdns
