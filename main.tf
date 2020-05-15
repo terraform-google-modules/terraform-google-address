@@ -33,6 +33,10 @@ locals {
     google_compute_address.ip.*.name,
     google_compute_global_address.global_ip.*.name,
   )
+  self_links = concat(
+    google_compute_address.ip.*.self_link,
+    google_compute_global_address.global_ip.*.self_link,
+  )
   dns_ptr_fqdns = data.template_file.ptrs.*.rendered
 }
 
