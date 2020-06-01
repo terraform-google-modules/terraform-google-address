@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.0](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v2.0.0...v2.1.0) (2020-06-01)
+
+
+### Features
+
+* Add self_links output ([#13](https://www.github.com/terraform-google-modules/terraform-google-address/issues/13)) ([43dfef4](https://www.github.com/terraform-google-modules/terraform-google-address/commit/43dfef4baa47d376e6e23d37a5f12d29f2fc5c27))
+
 ## [Unreleased]
 
 ## [v2.0.0](https://github.com/terraform-google-modules/terraform-google-address/releases/tag/v2.0.0) 2019-10-16
