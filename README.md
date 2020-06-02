@@ -25,6 +25,9 @@ following example:
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
   version = "0.1.0"
+  
+  project_id = "gcp-network"
+  region = "us-west1"
 
   subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
 
