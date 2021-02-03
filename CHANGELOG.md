@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+### [2.1.1](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v2.1.0...v2.1.1) (2021-02-03)
+
+
+### Bug Fixes
+
+* Remove symlinks in test fixtures ([#22](https://www.github.com/terraform-google-modules/terraform-google-address/issues/22)) ([912b479](https://www.github.com/terraform-google-modules/terraform-google-address/commit/912b479958a62558f9c6e33623dd6dca1c30ed3c))
+
 ## [2.1.0](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v2.0.0...v2.1.0) (2020-06-01)
 
 
