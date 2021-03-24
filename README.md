@@ -7,13 +7,10 @@ address resource which exists independent of the lifecycle of the resources
 that require the address.
 
 ## Compatibility
-
- This module is meant for use with Terraform 0.12+.
- If you haven't [upgraded](https://www.terraform.io/upgrade-guides/0-12.html)
-  and need a Terraform 0.11.x-compatible version of this module, the last released version intended for
-  Terraform 0.11.x is [1.0.0](https://registry.terraform.io/modules/terraform-google-modules/address/google/1.0.0).
-
-# Usage
+This module is meant for use with Terraform 0.13. If you haven't
+[upgraded](https://www.terraform.io/upgrade-guides/0-13.html) and need a Terraform
+0.12.x-compatible version of this module, the last released version
+intended for Terraform 0.12.x is [v2.1.1](https://registry.terraform.io/modules/terraform-google-modules/-address/google/v2.1.1).
 
 ## Examples without DNS
 
@@ -25,7 +22,7 @@ following example:
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
   version = "0.1.0"
-  
+
   project_id = "gcp-network"
   region = "us-west1"
 
@@ -218,7 +215,7 @@ Terraform may change this fact, but this is the current limitation.
 
 ## Requirements
 ### Terraform plugins
-- [Terraform](https://www.terraform.io/downloads.html) 0.11.x
+- [Terraform](https://www.terraform.io/downloads.html) >= 0.13.0
 - [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) plugin v1.12.0
 
 ### Configure a Service Account
