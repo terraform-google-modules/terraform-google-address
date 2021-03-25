@@ -181,27 +181,30 @@ dreaded `value of 'count' cannot be computed` error. Future versions of
 Terraform may change this fact, but this is the current limitation.
 
 [^]: (autogen_docs_start)
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| address\_type | The type of address to reserve, either "INTERNAL" or "EXTERNAL". If unspecified, defaults to "INTERNAL". | string | `"INTERNAL"` | no |
-| addresses | A list of IP addresses to create.  GCP will reserve unreserved addresses if given the value "".  If multiple names are given the default value is sufficient to have multiple addresses automatically picked for each name. | list | `<list>` | no |
-| dns\_domain | The domain to append to DNS short names when registering in Cloud DNS. | string | `""` | no |
-| dns\_managed\_zone | The name of the managed zone to create records within.  This managed zone must exist in the host project. | string | `""` | no |
-| dns\_project | The project where DNS A records will be configured. | string | `""` | no |
-| dns\_record\_type | The type of records to create in the managed zone.  (e.g. "A") | string | `"A"` | no |
-| dns\_reverse\_zone | The name of the managed zone to create PTR records within.  This managed zone must exist in the host project. | string | `""` | no |
-| dns\_short\_names | A list of DNS short names to register within Cloud DNS.  Names corresponding to addresses must align by their list index position in the two input variables, `names` and `dns_short_names`.  If an empty list, no domain names are registered.  Multiple names may be registered to the same address by passing a single element list to names and multiple elements to dns_short_names.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001"]) | list | `<list>` | no |
-| dns\_ttl | The DNS TTL in seconds for records created in Cloud DNS.  The default value should be used unless the application demands special handling. | string | `"300"` | no |
-| enable\_cloud\_dns | If a value is set, register records in Cloud DNS. | string | `""` | no |
-| enable\_reverse\_dns | If a value is set, register reverse DNS PTR records in Cloud DNS in the managed zone specified by dns_reverse_zone | string | `""` | no |
-| global | The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork. | string | `"false"` | no |
-| names | A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"]) | list | `<list>` | no |
-| project\_id | The project ID to create the address in | string | n/a | yes |
-| region | The region to create the address in | string | n/a | yes |
-| subnetwork | The subnet containing the address.  For EXTERNAL addresses use the empty string, "".  (e.g. "projects/<project-name>/regions/<region-name>/subnetworks/<subnetwork-name>") | string | `""` | no |
+|------|-------------|------|---------|:--------:|
+| address\_type | The type of address to reserve, either "INTERNAL" or "EXTERNAL". If unspecified, defaults to "INTERNAL". | `string` | `"INTERNAL"` | no |
+| addresses | A list of IP addresses to create.  GCP will reserve unreserved addresses if given the value "".  If multiple names are given the default value is sufficient to have multiple addresses automatically picked for each name. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| dns\_domain | The domain to append to DNS short names when registering in Cloud DNS. | `string` | `""` | no |
+| dns\_managed\_zone | The name of the managed zone to create records within.  This managed zone must exist in the host project. | `string` | `""` | no |
+| dns\_project | The project where DNS A records will be configured. | `string` | `""` | no |
+| dns\_record\_type | The type of records to create in the managed zone.  (e.g. "A") | `string` | `"A"` | no |
+| dns\_reverse\_zone | The name of the managed zone to create PTR records within.  This managed zone must exist in the host project. | `string` | `""` | no |
+| dns\_short\_names | A list of DNS short names to register within Cloud DNS.  Names corresponding to addresses must align by their list index position in the two input variables, `names` and `dns_short_names`.  If an empty list, no domain names are registered.  Multiple names may be registered to the same address by passing a single element list to names and multiple elements to dns\_short\_names.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001"]) | `list(string)` | `[]` | no |
+| dns\_ttl | The DNS TTL in seconds for records created in Cloud DNS.  The default value should be used unless the application demands special handling. | `number` | `300` | no |
+| enable\_cloud\_dns | If a value is set, register records in Cloud DNS. | `bool` | `false` | no |
+| enable\_reverse\_dns | If a value is set, register reverse DNS PTR records in Cloud DNS in the managed zone specified by dns\_reverse\_zone | `bool` | `false` | no |
+| global | The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork. | `bool` | `false` | no |
+| ip\_version | The IP Version that will be used by this address. | `string` | `"IPV4"` | no |
+| names | A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"]) | `list(string)` | `[]` | no |
+| network\_tier | The networking tier used for configuring this address. | `string` | `"PREMIUM"` | no |
+| prefix\_length | The prefix length of the IP range. | `number` | `16` | no |
+| project\_id | The project ID to create the address in | `string` | n/a | yes |
+| purpose | The purpose of the resource(GCE\_ENDPOINT, SHARED\_LOADBALANCER\_VIP, VPC\_PEERING). | `string` | `"GCE_ENDPOINT"` | no |
+| region | The region to create the address in | `string` | n/a | yes |
+| subnetwork | The subnet containing the address.  For EXTERNAL addresses use the empty string, "".  (e.g. "projects/<project-name>/regions/<region-name>/subnetworks/<subnetwork-name>") | `string` | `""` | no |
 
 ## Outputs
 
@@ -211,7 +214,7 @@ Terraform may change this fact, but this is the current limitation.
 | dns\_fqdns | List of DNS fully qualified domain names registered in Cloud DNS.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001.example.com", "gusw1-dev-fooapp-fe-0001-a-0002.example.com"]) |
 | names | List of address resource names managed by this module (e.g. ["gusw1-dev-fooapp-fe-0001-a-0001-ip"]) |
 | reverse\_dns\_fqdns | List of reverse DNS PTR records registered in Cloud DNS.  (e.g. ["1.2.11.10.in-addr.arpa", "2.2.11.10.in-addr.arpa"]) |
-| self\_links | List of URIs of the created address resources (e.g. ["https://www.googleapis.com/compute/v1/projects/project-abcde/regions/europe-west1/addresses/gusw1-dev-fooapp-fe-0001-a-0001-ip"] |
+| self\_links | List of URIs of the created address resources |
 
 [^]: (autogen_docs_end)
 
