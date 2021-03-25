@@ -106,3 +106,20 @@ variable "enable_reverse_dns" {
   default     = false
 }
 
+variable "purpose" {
+  type        = string
+  description = "The purpose of the resource."
+  default     = ""
+}
+
+variable "prefix_length" {
+  type        = number
+  description = "The prefix length of the IP range."
+  default     = null
+}
+
+variable "ip_version" {
+  type        = string
+  description = "The IP Version that will be used by this address."
+  default     = "IPV4"
+}

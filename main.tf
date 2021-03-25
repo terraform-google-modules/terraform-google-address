@@ -86,9 +86,15 @@ resource "google_compute_address" "ip" {
 }
 
 resource "google_compute_global_address" "global_ip" {
-  count   = local.global_addresses_count
-  project = var.project_id
-  name    = var.names[count.index]
+  count         = local.global_addresses_count
+  project       = var.project_id
+  name          = var.names[count.index]
+  address_type  = var.address_type
+  address       = element(var.addresses, count.index)
+  network       = var.subnetwork
+  purpose       = var.purpose
+  prefix_length = var.prefix_length
+  ip_version    = var.ip_version
 }
 
 /******************************************
