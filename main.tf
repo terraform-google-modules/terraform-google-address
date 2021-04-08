@@ -38,6 +38,7 @@ locals {
     google_compute_global_address.global_ip.*.self_link,
   )
   dns_ptr_fqdns = data.template_file.ptrs.*.rendered
+  prefix_length = var.address_type == "EXTERNAL" || (var.address_type == "INTERNAL" && var.purpose == "PRIVATE_SERVICE_CONNECT") ? null : var.prefix_length
 }
 
 resource "null_resource" "dns_args_missing" {
@@ -83,6 +84,8 @@ resource "google_compute_address" "ip" {
   address      = element(var.addresses, count.index)
   subnetwork   = var.subnetwork
   address_type = var.address_type
+  purpose      = var.address_type == "INTERNAL" ? var.purpose : null
+  network_tier = var.address_type == "INTERNAL" ? null : var.network_tier
 }
 
 resource "google_compute_global_address" "global_ip" {
@@ -91,9 +94,9 @@ resource "google_compute_global_address" "global_ip" {
   name          = var.names[count.index]
   address_type  = var.address_type
   address       = element(var.addresses, count.index)
-  network       = var.subnetwork
-  purpose       = var.purpose
-  prefix_length = var.prefix_length
+  network       = var.address_type == "EXTERNAL" ? null : var.subnetwork
+  purpose       = var.global && var.address_type == "INTERNAL" ? "VPC_PEERING" : null
+  prefix_length = local.prefix_length
   ip_version    = var.ip_version
 }
 
