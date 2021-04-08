@@ -108,14 +108,20 @@ variable "enable_reverse_dns" {
 
 variable "purpose" {
   type        = string
-  description = "The purpose of the resource."
-  default     = ""
+  description = "The purpose of the resource(GCE_ENDPOINT, SHARED_LOADBALANCER_VIP, VPC_PEERING)."
+  default     = "GCE_ENDPOINT"
+}
+
+variable "network_tier" {
+  type        = string
+  description = "The networking tier used for configuring this address."
+  default     = "PREMIUM"
 }
 
 variable "prefix_length" {
   type        = number
   description = "The prefix length of the IP range."
-  default     = null
+  default     = 16
 }
 
 variable "ip_version" {

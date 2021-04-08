@@ -32,20 +32,21 @@ This make target is the same that is executed by this module's CI pipeline durin
 For example:
 
 [^]: (autogen_docs_start)
-
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| billing\_account | The billing account id associated with the project, e.g. XXXXXX-YYYYYY-ZZZZZZ | string | n/a | yes |
-| folder\_id | The numeric folder id to create resources | string | n/a | yes |
-| organization\_id | The numeric organization id | string | n/a | yes |
-| region | The region to deploy to | string | n/a | yes |
+|------|-------------|------|---------|:--------:|
+| billing\_account | The billing account id associated with the project, e.g. XXXXXX-YYYYYY-ZZZZZZ | `string` | n/a | yes |
+| folder\_id | The numeric folder id to create resources | `string` | n/a | yes |
+| organization\_id | The numeric organization id | `string` | n/a | yes |
+| region | The region to deploy to | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| service\_account\_private\_key | The SA KEY JSON content.  Store in GOOGLE_CREDENTIALS. |
+| service\_account\_private\_key | The SA KEY JSON content.  Store in GOOGLE\_CREDENTIALS. |
 
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 [^]: (autogen_docs_end)

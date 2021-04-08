@@ -20,6 +20,10 @@ DOCKER_ORG 				:= gcr.io/cloud-foundation-cicd
 DOCKER_TAG_BASE_KITCHEN_TERRAFORM 	?= 2.3.0
 DOCKER_REPO_BASE_KITCHEN_TERRAFORM 	:= ${DOCKER_ORG}/cft/kitchen-terraform:${DOCKER_TAG_BASE_KITCHEN_TERRAFORM}
 
+DOCKER_TAG_VERSION_DEVELOPER_TOOLS := 0.13
+DOCKER_IMAGE_DEVELOPER_TOOLS := cft/developer-tools
+REGISTRY_URL := gcr.io/cloud-foundation-cicd
+
 # All is the first target in the file so it will get picked up when you just run 'make' on its own
 .PHONY: all
 all: check generate_docs
@@ -142,3 +146,20 @@ test_integration_docker:
 		-v "$(CURDIR)":/cft/workdir \
 		${DOCKER_REPO_BASE_KITCHEN_TERRAFORM} \
 		/bin/bash -c "cd /cft/workdir && source test/ci_integration.sh && setup_environment && make test_integration"
+
+# Generate documentation
+.PHONY: docker_generate_docs
+docker_generate_docs:
+	docker run --rm -it \
+		-v "$(CURDIR)":/workspace \
+		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
+		/bin/bash -c 'source /usr/local/bin/task_helper_functions.sh && generate_docs'
+
+# Execute lint tests within the docker container
+.PHONY: docker_test_lint
+docker_test_lint:
+	docker run --rm -it \
+		-e ENABLE_PARALLEL=1 \
+		-v "$(CURDIR)":/workspace \
+		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
+		/usr/local/bin/test_lint.sh
