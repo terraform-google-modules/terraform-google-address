@@ -15,7 +15,7 @@
 # Make will use bash instead of sh
 SHELL := /usr/bin/env bash
 
-CREDENTIALS_PATH 			?= /cft/workdir/credentials.json
+CREDENTIALS_PATH 			?= /Users/konstantin/.config/gcloud/terraform-non-production.json
 DOCKER_ORG 				:= gcr.io/cloud-foundation-cicd
 DOCKER_TAG_BASE_KITCHEN_TERRAFORM 	?= 2.3.0
 DOCKER_REPO_BASE_KITCHEN_TERRAFORM 	:= ${DOCKER_ORG}/cft/kitchen-terraform:${DOCKER_TAG_BASE_KITCHEN_TERRAFORM}
