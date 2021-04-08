@@ -32,6 +32,7 @@ both forward and reverse DNS lookup zones.
 | reverse\_dns\_fqdns | List of reverse DNS PTR records registered in Cloud DNS. |
 | reverse\_zone | The GCP name of the reverse lookup DNS zone being used |
 
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 [^]: (autogen_docs_end)
 
 To provision this example, run the following from within this directory:
