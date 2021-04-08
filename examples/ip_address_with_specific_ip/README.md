@@ -23,6 +23,7 @@ allowing GCP to dynamically assign it from the subnet provided).
 | project\_id | ID of the project being used |
 | region | Region being used |
 
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 [^]: (autogen_docs_end)
 
 To provision this example, run the following from within this directory:
