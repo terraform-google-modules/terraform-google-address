@@ -45,14 +45,16 @@ resource "google_compute_subnetwork" "main" {
 }
 
 resource "google_dns_managed_zone" "forward" {
-  name        = local.forward_zone
-  dns_name    = "${local.domain}."
-  description = "DNS forward lookup zone example"
+  name          = local.forward_zone
+  dns_name      = "${local.domain}."
+  description   = "DNS forward lookup zone example"
+  force_destroy = true
 }
 
 resource "google_dns_managed_zone" "reverse" {
-  name        = local.reverse_zone
-  dns_name    = "10.10.in-addr.arpa."
-  description = "DNS reverse lookup zone example"
+  name          = local.reverse_zone
+  dns_name      = "10.10.in-addr.arpa."
+  description   = "DNS reverse lookup zone example"
+  force_destroy = true
 }
 
