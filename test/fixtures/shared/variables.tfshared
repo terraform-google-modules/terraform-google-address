@@ -22,5 +22,6 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "The region to deploy to"
+  default     = "us-central1"
 }
 
