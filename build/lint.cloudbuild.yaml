@@ -25,5 +25,3 @@ substitutions:
   _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.13'
 options:
   machineType: 'N1_HIGHCPU_8'
-  env:
-  - ENABLE_PARALLEL=1
