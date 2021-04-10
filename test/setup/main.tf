@@ -14,27 +14,26 @@
  * limitations under the License.
  */
 
-module "example" {
-  source           = "../../../examples/dns_forward_and_reverse"
-  project_id       = var.project_id
-  region           = var.region
-  subnetwork       = google_compute_subnetwork.main.name
-  dns_project      = var.project_id
-  dns_domain       = local.domain
-  dns_managed_zone = google_dns_managed_zone.forward.name
-  dns_reverse_zone = google_dns_managed_zone.reverse.name
-
-
-  names = [
-    "dynamically-reserved-ip-030",
-    "dynamically-reserved-ip-031",
-    "dynamically-reserved-ip-032",
-  ]
-
-  dns_short_names = [
-    "testip-031",
-    "testip-032",
-    "testip-033",
-  ]
+resource "random_id" "random_project_id_suffix" {
+  byte_length = 4
 }
 
+module "address_module" {
+  source  = "terraform-google-modules/project-factory/google"
+  version = "~> 10.2"
+
+  name              = "ci-address-${random_id.random_project_id_suffix.hex}"
+  random_project_id = true
+  org_id            = var.org_id
+  folder_id         = var.folder_id
+  billing_account   = var.billing_account
+
+  auto_create_network = false
+
+  activate_apis = [
+    "oslogin.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "compute.googleapis.com",
+    "dns.googleapis.com",
+  ]
+}

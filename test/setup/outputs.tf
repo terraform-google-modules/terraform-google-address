@@ -16,5 +16,9 @@
 output "service_account_private_key" {
   description = "The SA KEY JSON content.  Store in GOOGLE_CREDENTIALS."
   value       = base64decode(google_service_account_key.address.private_key)
+  sensitive   = true
 }
 
+output "project_id" {
+  value = module.address_module.project_id
+}

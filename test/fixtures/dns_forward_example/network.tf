@@ -16,7 +16,7 @@
 
 locals {
   randomized_name = "cft-address-test-${random_string.suffix.result}"
-  domain          = "justfortesting.local"
+  domain          = "justfortesting2.local"
   forward_zone    = "forward-example-only"
 }
 
@@ -44,8 +44,9 @@ resource "google_compute_subnetwork" "main" {
 }
 
 resource "google_dns_managed_zone" "forward" {
-  name        = local.forward_zone
-  dns_name    = "${local.domain}."
-  description = "DNS forward lookup zone example"
+  name          = local.forward_zone
+  dns_name      = "${local.domain}."
+  description   = "DNS forward lookup zone example"
+  force_destroy = true
 }
 
