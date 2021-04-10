@@ -21,8 +21,9 @@ module "example" {
   subnetwork       = google_compute_subnetwork.main.name
   dns_project      = var.project_id
   dns_domain       = local.domain
-  dns_managed_zone = local.forward_zone
-  dns_reverse_zone = local.reverse_zone
+  dns_managed_zone = google_dns_managed_zone.forward.name
+  dns_reverse_zone = google_dns_managed_zone.reverse.name
+
 
   names = [
     "dynamically-reserved-ip-030",

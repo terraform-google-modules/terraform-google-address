@@ -16,7 +16,7 @@
 
 locals {
   randomized_name = "cft-address-test-${random_string.suffix.result}"
-  domain          = "justfortesting.local"
+  domain          = "justfortesting2.local"
   forward_zone    = "forward-example-only"
 }
 
