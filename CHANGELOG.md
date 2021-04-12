@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v2.1.1...v3.0.0) (2021-04-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* add Terraform 0.13 constraint and module attribution
+
+### Features
+
+* Add support for setting purpose, network_tier, prefix_length, and ip_version ([#29](https://www.github.com/terraform-google-modules/terraform-google-address/issues/29)) ([451c131](https://www.github.com/terraform-google-modules/terraform-google-address/commit/451c131105c2313e47ce5e01fcfdfc153b7dd21b))
+* add Terraform 0.13 constraint and module attribution ([88a65ae](https://www.github.com/terraform-google-modules/terraform-google-address/commit/88a65ae7d754d3aca387eb06df825482eb4cfd18))
+
 ### [2.1.1](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v2.1.0...v2.1.1) (2021-02-03)
 
 
