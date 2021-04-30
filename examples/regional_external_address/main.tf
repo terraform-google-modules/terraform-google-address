@@ -23,10 +23,10 @@ provider "google" {
 }
 
 module "address" {
-  source  = "terraform-google-modules/address/google"
-  version = "3.0.0"
-  project_id = var.project_id # Replace this with your service project ID in quotes
-  region = "europe-west1"
+  source       = "terraform-google-modules/address/google"
+  version      = "3.0.0"
+  project_id   = var.project_id # Replace this with your service project ID in quotes
+  region       = "europe-west1"
   address_type = "EXTERNAL"
   names = [
     "regional-external-ip-address-1",
