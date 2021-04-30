@@ -28,12 +28,3 @@ resource "google_compute_global_address" "default" {
   address_type = "EXTERNAL"
   ip_version   = "IPV6"
 }
-
-#module "address" {
-#  source       = "terraform-google-modules/address/google"
-#  version      = "3.0.0"
-#  project_id   = var.project_id # Replace this with your service project ID in quotes
-#  name         = "ipv6-address"
-#  address_type = "EXTERNAL"
-#  ip_version   = "IPV6"
-#}
