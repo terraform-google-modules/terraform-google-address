@@ -5,6 +5,20 @@ IP addresses (instead of allowing Google Cloud to dynamically
 assign them from the subnet provided).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| project\_id | The Google Cloud project ID to deploy to | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| addresses | List of address values managed by this module (e.g. ["1.2.3.4"]) |
+| names | List of address resource names managed by this module (e.g. ["gusw1-dev-fooapp-fe-0001-a-0001-ip"]) |
+| project\_id | ID of the project being used |
+| region | Region being used |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
