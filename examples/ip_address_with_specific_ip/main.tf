@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
+provider "null" {
+  version = "~> 2.1"
+}
+
 provider "google" {
-  region = var.region
+  version = "~> 3.53.0"
 }
 
 module "address" {
-  source     = "../../"
-  project_id = var.project_id
-  region     = var.region
-  subnetwork = var.subnetwork
-  names      = var.names
-  addresses  = var.addresses
+  source     = "terraform-google-modules/address/google"
+  version    = "3.0.0"
+  project_id = var.project_id # Replace this with your project ID in quotes
+  region     = "asia-east1"
+  subnetwork = "my-subnet"
+  names      = ["internal-address1", "internal-address2"]
+  addresses  = ["10.0.0.3", "10.0.0.4"]
 }
 
