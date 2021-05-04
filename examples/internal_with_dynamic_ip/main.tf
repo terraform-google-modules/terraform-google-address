@@ -22,6 +22,7 @@ provider "google" {
   version = "~> 3.53.0"
 }
 
+# [START compute_internal_ip_create]
 module "address" {
   source     = "terraform-google-modules/address/google"
   version    = "3.0.0"
@@ -30,4 +31,4 @@ module "address" {
   subnetwork = "my-subnet"
   names      = ["internal-address1", "internal-address2"]
 }
-
+# [END compute_internal_ip_create]
