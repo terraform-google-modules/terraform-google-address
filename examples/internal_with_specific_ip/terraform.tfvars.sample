@@ -1,0 +1,12 @@
+# Region and Project setup
+region           = "us-west1"
+project_id       = "my-project-name"
+
+# Subnetwork where the IP Address will be reserved
+subnetwork       = ""
+
+# List of GCP resource names for each IP address desired
+names            = [""]
+
+# List of specific IP addresses to be reserved (must be equal in length and directly correspond to names variable)
+addresses        = [""]
