@@ -22,6 +22,7 @@ provider "google" {
   version = "~> 3.53.0"
 }
 
+# [START compute_external_ip_create]
 module "address" {
   source       = "terraform-google-modules/address/google"
   version      = "3.0.0"
@@ -34,4 +35,5 @@ module "address" {
     "regional-external-ip-address-3"
   ]
 }
+# [END compute_external_ip_create]
 
