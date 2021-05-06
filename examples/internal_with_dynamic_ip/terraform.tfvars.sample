@@ -7,6 +7,3 @@ subnetwork       = ""
 
 # List of GCP resource names for each IP address desired
 names            = [""]
-
-# List of specific IP addresses to be reserved (must be equal in length and directly correspond to names variable)
-addresses        = [""]

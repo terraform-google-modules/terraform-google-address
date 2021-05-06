@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-provider "null" {
-  version = "~> 2.1"
+output "addresses" {
+  description = "List of address values managed by this module (e.g. [\"1.2.3.4\"])"
+  value       = module.address.addresses
 }
 
-provider "google" {
-  version = "~> 3.53.0"
+output "names" {
+  description = "List of address resource names managed by this module (e.g. [\"gusw1-dev-fooapp-fe-0001-a-0001-ip\"])"
+  value       = module.address.names
 }
 
-# [START compute_external_ip_create]
-resource "google_compute_global_address" "default" {
-  project      = var.project_id # Replace this with your service project ID in quotes
-  name         = "ipv6-address"
-  address_type = "EXTERNAL"
-  ip_version   = "IPV6"
-}
-# [END compute_external_ip_create]

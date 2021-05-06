@@ -14,19 +14,6 @@
  * limitations under the License.
  */
 
-provider "null" {
-  version = "~> 2.1"
+terraform {
+  required_version = ">= 0.12"
 }
-
-provider "google" {
-  version = "~> 3.53.0"
-}
-
-# [START compute_external_ip_create]
-resource "google_compute_global_address" "default" {
-  project      = var.project_id # Replace this with your service project ID in quotes
-  name         = "ipv6-address"
-  address_type = "EXTERNAL"
-  ip_version   = "IPV6"
-}
-# [END compute_external_ip_create]
