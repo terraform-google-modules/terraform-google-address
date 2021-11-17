@@ -14,14 +14,6 @@
  * limitations under the License.
  */
 
-provider "null" {
-  version = "~> 2.1"
-}
-
-provider "google" {
-  version = "~> 3.53.0"
-}
-
 # [START compute_internal_ip_create]
 module "address" {
   source     = "terraform-google-modules/address/google"
