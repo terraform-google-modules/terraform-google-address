@@ -14,14 +14,6 @@
  * limitations under the License.
  */
 
-provider "null" {
-  version = "~> 2.1"
-}
-
-provider "google" {
-  version = "~> 3.53.0"
-}
-
 # [START compute_external_ip_create]
 resource "google_compute_global_address" "default" {
   project      = var.project_id # Replace this with your service project ID in quotes
