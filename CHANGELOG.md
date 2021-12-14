@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.0](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v3.0.0...v3.1.0) (2021-12-14)
+
+
+### Features
+
+* update TPG version constraints to allow 4.0 ([#35](https://www.github.com/terraform-google-modules/terraform-google-address/issues/35)) ([537186d](https://www.github.com/terraform-google-modules/terraform-google-address/commit/537186da3e127fb55b47375877517686d0a9d3a0))
+
 ## [3.0.0](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v2.1.1...v3.0.0) (2021-04-12)
 
 
