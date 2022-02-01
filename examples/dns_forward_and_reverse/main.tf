@@ -19,17 +19,17 @@ provider "google" {
 }
 
 module "address" {
-  source           = "../../"
-  project_id       = var.project_id
-  region           = var.region
-  subnetwork       = var.subnetwork
-  enable_cloud_dns = true
+  source             = "../../"
+  project_id         = var.project_id
+  region             = var.region
+  subnetwork         = var.subnetwork
+  enable_cloud_dns   = true
   enable_reverse_dns = true
-  dns_domain       = var.dns_domain
-  dns_managed_zone = var.dns_managed_zone
-  dns_reverse_zone = var.dns_reverse_zone
-  dns_project      = var.dns_project
-  names            = var.names
-  dns_short_names  = var.dns_short_names
+  dns_domain         = var.dns_domain
+  dns_managed_zone   = var.dns_managed_zone
+  dns_reverse_zone   = var.dns_reverse_zone
+  dns_project        = var.dns_project
+  names              = var.names
+  dns_short_names    = var.dns_short_names
 }
 
