@@ -37,8 +37,13 @@ locals {
     google_compute_address.ip.*.self_link,
     google_compute_global_address.global_ip.*.self_link,
   )
-  dns_ptr_fqdns = data.template_file.ptrs.*.rendered
   prefix_length = var.address_type == "EXTERNAL" || (var.address_type == "INTERNAL" && var.purpose == "PRIVATE_SERVICE_CONNECT") ? null : var.prefix_length
+
+  /******************************************
+  Format reverse DNS entries - see https://github.com/hashicorp/terraform/issues/9404
+  *****************************************/
+  split_ips     = [for ip in local.ip_addresses : split(".", ip)]
+  dns_ptr_fqdns = var.enable_reverse_dns ? [for split_ip in local.split_ips : "${split_ip[3]}.${split_ip[2]}.${split_ip[1]}.${split_ip[0]}.in-addr.arpa"] : []
 }
 
 resource "null_resource" "dns_args_missing" {
@@ -54,22 +59,6 @@ resource "null_resource" "ptr_args_missing" {
   provisioner "local-exec" {
     command     = "echo \"ERROR: Variable 'enable_reverse_dns' was passed to enable reverse DNS registration. Please provide a value for the 'dns_reverse_zone' input variable to continue\"; false"
     interpreter = ["bash", "-c"]
-  }
-}
-
-/******************************************
-  Format reverse DNS entries - see https://github.com/hashicorp/terraform/issues/9404
- *****************************************/
-data "template_file" "ptrs" {
-  count = var.enable_reverse_dns ? local.regional_addresses_count : 0
-
-  template = "$${d}.$${c}.$${b}.$${a}.in-addr.arpa"
-
-  vars = {
-    a = split(".", local.ip_addresses[count.index])[0]
-    b = split(".", local.ip_addresses[count.index])[1]
-    c = split(".", local.ip_addresses[count.index])[2]
-    d = split(".", local.ip_addresses[count.index])[3]
   }
 }
 

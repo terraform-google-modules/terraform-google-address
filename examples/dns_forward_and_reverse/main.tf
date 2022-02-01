@@ -24,6 +24,7 @@ module "address" {
   region           = var.region
   subnetwork       = var.subnetwork
   enable_cloud_dns = true
+  enable_reverse_dns = true
   dns_domain       = var.dns_domain
   dns_managed_zone = var.dns_managed_zone
   dns_reverse_zone = var.dns_reverse_zone
