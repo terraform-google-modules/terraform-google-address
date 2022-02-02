@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+### [3.1.1](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.0...v3.1.1) (2022-02-02)
+
+
+### Bug Fixes
+
+* Remove need for deprecated template terraform provider ([#38](https://github.com/terraform-google-modules/terraform-google-address/issues/38)) ([a6d91de](https://github.com/terraform-google-modules/terraform-google-address/commit/a6d91de9ab21851f002c95a4fad5cfca70d257bc))
+
 ## [3.1.0](https://www.github.com/terraform-google-modules/terraform-google-address/compare/v3.0.0...v3.1.0) (2021-12-14)
 
 
