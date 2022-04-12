@@ -73,6 +73,7 @@ resource "google_compute_address" "ip" {
   address      = element(var.addresses, count.index)
   subnetwork   = var.subnetwork
   address_type = var.address_type
+  description = element(var.descriptions, count.index)
   purpose      = var.address_type == "INTERNAL" ? var.purpose : null
   network_tier = var.address_type == "INTERNAL" ? null : var.network_tier
 }

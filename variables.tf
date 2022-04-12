@@ -129,3 +129,9 @@ variable "ip_version" {
   description = "The IP Version that will be used by this address."
   default     = "IPV4"
 }
+
+variable "descriptions" {
+  description = "A list of descriptions to add to each address."
+  type        = list(string)
+  default     = [""]
+}
