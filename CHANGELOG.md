@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.1...v3.2.0) (2022-08-30)
+
+
+### Features
+
+* adding stale.yml ([#43](https://github.com/terraform-google-modules/terraform-google-address/issues/43)) ([a17feb6](https://github.com/terraform-google-modules/terraform-google-address/commit/a17feb6e71a30f5b4d8a5b1aabf8a1e1d9324af4))
+
 ### [3.1.1](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.0...v3.1.1) (2022-02-02)
 
 
