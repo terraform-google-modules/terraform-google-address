@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,30 @@
 
 locals {
   randomized_name = "cft-address-test-${random_string.suffix.result}"
-  domain          = "justfortesting-${random_string.suffix.result}.local"
-  forward_zone    = "forward-cft-address-test"
-  reverse_zone    = "reverse-cft-address-test"
+  domain          = "justfortestingmultinames-${random_string.suffix.result}.local"
+  forward_zone    = "forward-example-multinames"
+  names = [
+    "dynamically-reserved-ip-020",
+  ]
+
+  dns_short_names = [
+    "testip-021",
+    "testip-022",
+    "testip-023",
+  ]
+}
+
+module "address" {
+  source           = "../../"
+  project_id       = var.project_id
+  region           = var.region
+  enable_cloud_dns = true
+  dns_domain       = local.domain
+  dns_managed_zone = google_dns_managed_zone.forward.name
+  dns_project      = var.project_id
+  names            = local.names
+  dns_short_names  = local.dns_short_names
+  address_type     = "EXTERNAL"
 }
 
 resource "random_string" "suffix" {
@@ -27,35 +48,10 @@ resource "random_string" "suffix" {
   upper   = false
 }
 
-provider "google" {
-  project = var.project_id
-}
-
-resource "google_compute_network" "main" {
-  name                    = local.randomized_name
-  auto_create_subnetworks = false
-}
-
-resource "google_compute_subnetwork" "main" {
-  name                     = local.randomized_name
-  ip_cidr_range            = "10.10.0.0/24"
-  region                   = var.region
-  private_ip_google_access = true
-  network                  = google_compute_network.main.self_link
-}
-
 resource "google_dns_managed_zone" "forward" {
   name          = local.forward_zone
   dns_name      = "${local.domain}."
   description   = "DNS forward lookup zone example"
   force_destroy = true
+  project       = var.project_id
 }
-
-resource "google_dns_managed_zone" "reverse" {
-  name          = local.reverse_zone
-  dns_name      = "10.10.in-addr.arpa."
-  description   = "DNS reverse lookup zone example"
-  force_destroy = true
-  visibility    = "private"
-}
-

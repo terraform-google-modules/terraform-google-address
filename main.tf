@@ -46,22 +46,6 @@ locals {
   dns_ptr_fqdns = var.enable_reverse_dns ? [for split_ip in local.split_ips : "${split_ip[3]}.${split_ip[2]}.${split_ip[1]}.${split_ip[0]}.in-addr.arpa"] : []
 }
 
-resource "null_resource" "dns_args_missing" {
-  count = local.dns_args_missing
-  provisioner "local-exec" {
-    command     = "echo \"ERROR: Variable 'enable_cloud_dns' was passed to enable DNS registration. Please provide values for the 'dns_domain', 'dns_project', and 'dns_managed_zone' input variables to continue\"; false"
-    interpreter = ["bash", "-c"]
-  }
-}
-
-resource "null_resource" "ptr_args_missing" {
-  count = local.ptr_args_missing
-  provisioner "local-exec" {
-    command     = "echo \"ERROR: Variable 'enable_reverse_dns' was passed to enable reverse DNS registration. Please provide a value for the 'dns_reverse_zone' input variable to continue\"; false"
-    interpreter = ["bash", "-c"]
-  }
-}
-
 /******************************************
   IP address reservation
  *****************************************/
