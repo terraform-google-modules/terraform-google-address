@@ -16,7 +16,7 @@
 
 locals {
   randomized_name = "cft-address-test-${random_string.suffix.result}"
-  domain          = "justfortesting-abc.local"
+  domain          = "justfortesting-${random_string.suffix.result}.local"
   forward_zone    = "forward-cft-address-test"
   reverse_zone    = "reverse-cft-address-test"
 }
@@ -38,7 +38,7 @@ resource "google_compute_network" "main" {
 
 resource "google_compute_subnetwork" "main" {
   name                     = local.randomized_name
-  ip_cidr_range            = "10.10.0.0/24"
+  ip_cidr_range            = "10.20.0.0/24"
   region                   = var.region
   private_ip_google_access = true
   network                  = google_compute_network.main.self_link
@@ -53,7 +53,7 @@ resource "google_dns_managed_zone" "forward" {
 
 resource "google_dns_managed_zone" "reverse" {
   name          = local.reverse_zone
-  dns_name      = "10.10.in-addr.arpa."
+  dns_name      = "10.20.in-addr.arpa."
   description   = "DNS reverse lookup zone example"
   force_destroy = true
 }
