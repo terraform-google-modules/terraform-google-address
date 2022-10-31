@@ -98,7 +98,7 @@ resource "google_dns_record_set" "ip" {
   managed_zone = var.dns_managed_zone
   type         = var.dns_record_type
   ttl          = var.dns_ttl
-  rrdatas      = [local.ip_addresses[count.index]]
+  rrdatas      = length(local.ip_addresses) == 1 ? [local.ip_addresses[0]] : [local.ip_addresses[count.index]]
   project      = var.dns_project
 }
 
