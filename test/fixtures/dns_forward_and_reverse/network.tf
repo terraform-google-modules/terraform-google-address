@@ -53,7 +53,7 @@ resource "google_dns_managed_zone" "forward" {
 
 resource "google_dns_managed_zone" "reverse" {
   name          = local.reverse_zone
-  dns_name      = "10.10.in-addr-abc.arpa."
+  dns_name      = "10.10.in-addr.arpa."
   description   = "DNS reverse lookup zone example"
   force_destroy = true
 }
