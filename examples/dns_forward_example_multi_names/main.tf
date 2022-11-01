@@ -19,13 +19,13 @@ locals {
   domain          = "justfortestingmultinames-${random_string.suffix.result}.local"
   forward_zone    = "forward-example-multinames"
   names = [
-    "dynamically-reserved-ip-020",
+    "dynamically-reserved-ip-040",
   ]
 
   dns_short_names = [
-    "testip-021",
-    "testip-022",
-    "testip-023",
+    "testip-041",
+    "testip-042",
+    "testip-043",
   ]
 }
 
