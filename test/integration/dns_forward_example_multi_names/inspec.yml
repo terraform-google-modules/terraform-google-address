@@ -12,5 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-releaseType: terraform-module
-handleGHRelease: true
+name: dns_forward_example_multi_names
+attributes:
+  - name: project_id
+    required: true
+    type: string
+
+  - name: addresses
+    required: true
+    type: array
+
+  - name: names
+    required: true
+    type: array
+
+  - name: dns_fqdns
+    required: true
+    type: array
+
+  - name: forward_zone
+    required: true
+    type: string
+
