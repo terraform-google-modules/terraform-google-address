@@ -17,16 +17,7 @@
 locals {
   randomized_name = "cft-address-test-${random_string.suffix.result}"
   domain          = "justfortestingmultinames-${random_string.suffix.result}.local"
-  forward_zone    = "forward-example-multinames"
-  names = [
-    "dynamically-reserved-ip-040",
-  ]
-
-  dns_short_names = [
-    "testip-041",
-    "testip-042",
-    "testip-043",
-  ]
+  forward_zone    = "forward-example-multinames"  
 }
 
 module "address" {
@@ -37,8 +28,14 @@ module "address" {
   dns_domain       = local.domain
   dns_managed_zone = google_dns_managed_zone.forward.name
   dns_project      = var.project_id
-  names            = local.names
-  dns_short_names  = local.dns_short_names
+  names            = [
+    "dynamically-reserved-ip-040",
+  ]
+  dns_short_names  = [
+    "testip-041",
+    "testip-042",
+    "testip-043",
+  ]
   address_type     = "EXTERNAL"
 }
 
