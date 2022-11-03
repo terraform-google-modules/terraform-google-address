@@ -25,7 +25,7 @@ terraform {
   }
 
   provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-address/v3.1.1"
+    module_name = "blueprints/terraform/terraform-google-address/v3.1.2"
   }
 
 }
