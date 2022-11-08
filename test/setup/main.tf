@@ -20,7 +20,7 @@ resource "random_id" "random_project_id_suffix" {
 
 module "address_module" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.2"
+  version = "~> 14.0"
 
   name              = "ci-address-${random_id.random_project_id_suffix.hex}"
   random_project_id = true
