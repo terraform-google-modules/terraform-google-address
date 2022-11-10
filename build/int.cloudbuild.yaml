@@ -25,7 +25,7 @@ steps:
   waitFor:
     - prepare
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run create TestIpAddressOnly --verbose --stage init']
+  args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly --verbose --stage init']
 - id: converge ip-address-only-local
   waitFor:
     - create ip-address-only-local
@@ -70,7 +70,7 @@ steps:
   waitFor:
     - create TestDnsForwardExample
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run converge TestDnsForwardExample --verbose --stage apply']
+  args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExample --verbose --stage apply']
 - id: verify TestDnsForwardExample
   waitFor:
     - converge TestDnsForwardExample
@@ -90,7 +90,7 @@ steps:
   waitFor:
     - create TestDnsForwardExampleMultiNames
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run converge TestDnsForwardExampleMultiNames --verbose --stage apply ']
+  args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExampleMultiNames --verbose --stage apply ']
 - id: verify TestDnsForwardExampleMultiNames
   waitFor:
     - converge TestDnsForwardExampleMultiNames
@@ -110,7 +110,7 @@ steps:
   waitFor:
     - create TestDnsForwardAndReverse
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run converge TestDnsForwardAndReverse --verbose --stage apply ']
+  args: ['/bin/bash', '-c', 'cft test run TestDnsForwardAndReverse --verbose --stage apply ']
 - id: verify TestDnsForwardAndReverse
   waitFor:
     - converge TestDnsForwardAndReverse
