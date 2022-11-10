@@ -25,22 +25,22 @@ steps:
   waitFor:
     - prepare
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run create TestIpAddressOnly--verbose --stage init']
+  args: ['/bin/bash', '-c', 'cft test run create TestIpAddressOnly --verbose --stage init']
 - id: converge ip-address-only-local
   waitFor:
     - create ip-address-only-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly--verbose --stage apply']
+  args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly --verbose --stage apply']
 - id: verify ip-address-only-local
   waitFor:
     - converge ip-address-only-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly--verbose --stage verify']
+  args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly --verbose --stage verify']
 - id: destroy ip-address-only-local
   waitFor:
     - verify ip-address-only-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly--verbose --stage teardown']
+  args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly --verbose --stage teardown']
 - id: create ip-address-with-specific-ip-local
   waitFor:
     - prepare
