@@ -55,7 +55,7 @@ steps:
   waitFor:
     - converge ip-address-with-specific-ip-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run ip-address-with-specific-ip-local --verbose --stage verify'']
+  args: ['/bin/bash', '-c', 'cft test run ip-address-with-specific-ip-local --verbose --stage verify']
 - id: destroy ip-address-with-specific-ip-local
   waitFor:
     - verify ip-address-with-specific-ip-local
