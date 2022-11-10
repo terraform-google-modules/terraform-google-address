@@ -21,18 +21,106 @@ steps:
   - 'TF_VAR_org_id=$_ORG_ID'
   - 'TF_VAR_folder_id=$_FOLDER_ID'
   - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
-- id: create
+- id: create ip-address-only-local
+  waitFor:
+    - prepare
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run all --stage init --verbose']
-- id: converge
+  args: ['/bin/bash', '-c', 'cft test run create ip-address-only-local --verbose --stage init']
+- id: converge ip-address-only-local
+  waitFor:
+    - create ip-address-only-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run all --stage apply --verbose']
-- id: verify
+  args: ['/bin/bash', '-c', 'cft test run ip-address-only-local --verbose --stage apply']
+- id: verify ip-address-only-local
+  waitFor:
+    - converge ip-address-only-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run all --stage verify --verbose']
-- id: destroy
+  args: ['/bin/bash', '-c', 'cft test run ip-address-only-local --verbose --stage verify']
+- id: destroy ip-address-only-local
+  waitFor:
+    - verify ip-address-only-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run all --stage teardown --verbose']
+  args: ['/bin/bash', '-c', 'cft test run ip-address-only-local --verbose --stage teardown']
+- id: create ip-address-with-specific-ip-local
+  waitFor:
+    - prepare
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run ip-address-with-specific-ip-local --verbose --stage init']
+- id: converge ip-address-with-specific-ip-local
+  waitFor:
+    - create ip-address-with-specific-ip-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run ip-address-with-specific-ip-local --verbose --stage apply']
+- id: verify ip-address-with-specific-ip-local
+  waitFor:
+    - converge ip-address-with-specific-ip-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run ip-address-with-specific-ip-local --verbose --stage verify'']
+- id: destroy ip-address-with-specific-ip-local
+  waitFor:
+    - verify ip-address-with-specific-ip-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run ip-address-with-specific-ip-local --verbose --stage teardown']
+- id: create dns-forward-example-local
+  waitFor:
+    - prepare
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-example-local --verbose --stage init']
+- id: converge dns-forward-example-local
+  waitFor:
+    - create dns-forward-example-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run converge dns-forward-example-local --verbose --stage apply']
+- id: verify dns-forward-example-local
+  waitFor:
+    - converge dns-forward-example-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-example-local --verbose --stage verify']
+- id: destroy dns-forward-example-local
+  waitFor:
+    - verify dns-forward-example-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-example-local --verbose --stage teardown']
+- id: create dns-forward-example-multi-names-local
+  waitFor:
+    - prepare
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-example-multi-names-local --verbose --stage init']
+- id: converge dns-forward-example-multi-names-local
+  waitFor:
+    - create dns-forward-example-multi-names-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run converge dns-forward-example-multi-names-local --verbose --stage apply ']
+- id: verify dns-forward-example-multi-names-local
+  waitFor:
+    - converge dns-forward-example-multi-names-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-example-multi-names-local --verbose --stage verify']
+- id: destroy dns-forward-example-multi-names-local
+  waitFor:
+    - verify dns-forward-example-multi-names-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-example-multi-names-local --verbose --stage teardown']
+- id: create dns-forward-and-reverse-local
+  waitFor:
+    - prepare
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-and-reverse-local --verbose --stage init ']
+- id: converge dns-forward-and-reverse-local
+  waitFor:
+    - create dns-forward-and-reverse-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run converge dns-forward-and-reverse-local --verbose --stage apply ']
+- id: verify dns-forward-and-reverse-local
+  waitFor:
+    - converge dns-forward-and-reverse-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-and-reverse-local --verbose --stage verify']
+- id: destroy dns-forward-and-reverse-local
+  waitFor:
+    - verify dns-forward-and-reverse-local
+  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: ['/bin/bash', '-c', 'cft test run dns-forward-and-reverse-local --verbose --stage teardown']
 tags:
 - 'ci'
 - 'integration'
