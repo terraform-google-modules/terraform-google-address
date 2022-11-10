@@ -45,7 +45,7 @@ steps:
   waitFor:
     - prepare
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'cft test run TestIpAddressWithSpecificIp--verbose --stage init']
+  args: ['/bin/bash', '-c', 'cft test run TestIpAddressWithSpecificIp --verbose --stage init']
 - id: converge ip-address-with-specific-ip-local
   waitFor:
     - create ip-address-with-specific-ip-local
