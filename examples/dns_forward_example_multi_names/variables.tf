@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-# [START compute_internal_ip_create]
-module "address" {
-  source     = "terraform-google-modules/address/google"
-  version    = "~> 3.1"
-  project_id = var.project_id # Replace this with your project ID in quotes
-  region     = "asia-east1"
-  subnetwork = "my-subnet"
-  names      = ["internal-address1", "internal-address2"]
+variable "project_id" {
+  type        = string
+  description = "The project ID to deploy to"
 }
-# [END compute_internal_ip_create]
+
+variable "region" {
+  type        = string
+  description = "The region to deploy to"
+  default     = "us-central1"
+}
