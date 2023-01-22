@@ -202,6 +202,7 @@ Terraform may change this fact, but this is the current limitation.
 | purpose | The purpose of the resource(GCE\_ENDPOINT, SHARED\_LOADBALANCER\_VIP, VPC\_PEERING). | `string` | `"GCE_ENDPOINT"` | no |
 | region | The region to create the address in | `string` | n/a | yes |
 | subnetwork | The subnet containing the address.  For EXTERNAL addresses use the empty string, "".  (e.g. "projects/<project-name>/regions/<region-name>/subnetworks/<subnetwork-name>") | `string` | `""` | no |
+| descriptions | A list of descriptions to add to each address. | `list(string)`| <pre>[<br>  ""<br>]</pre> | no |
 
 ## Outputs
 
