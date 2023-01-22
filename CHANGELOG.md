@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.2](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.1...v3.1.2) (2022-11-03)
+
+
+### Bug Fixes
+
+* maps one ip to multiple dns records ([#59](https://github.com/terraform-google-modules/terraform-google-address/issues/59)) ([6085d28](https://github.com/terraform-google-modules/terraform-google-address/commit/6085d282a74c8b918f6f08b30224e064955b3384))
+
 ### [3.1.1](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.0...v3.1.1) (2022-02-02)
 
 

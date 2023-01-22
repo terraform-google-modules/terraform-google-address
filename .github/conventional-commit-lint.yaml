@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: ip_address_with_specific_ip
-attributes:
-  - name: project_id
-    required: true
-    type: string
-
-  - name: names
-    required: true
-    type: array
-
-  - name: addresses
-    required: true
-    type: array
-
+enabled: true
+always_check_pr_title: true
