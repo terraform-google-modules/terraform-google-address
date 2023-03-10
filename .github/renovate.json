@@ -42,11 +42,6 @@
     {
       "matchPackageNames": ["google", "google-beta"],
       "groupName": "terraform googles"
-    },
-    {
-      "matchPaths": ["build/**", "Makefile", "infra/**"],
-      "extends": [":semanticCommitTypeAll(chore)"],
-      "groupName": "developer tools"
     }
   ],
   "regexManagers": [
