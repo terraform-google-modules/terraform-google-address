@@ -1,4 +1,4 @@
-# [Google Address Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/address/google/)
+# [Google Address Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/terraform-google-address/)
 
 This terraform module provides the means to permanently reserve an [IP address](https://cloud.google.com/compute/docs/ip-addresses/)
 available to Google Cloud Platform (GCP) resources, and optionally create
@@ -20,7 +20,7 @@ following example:
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/address/google"
+  source  = "terraform-google-modules/terraform-google-address"
   version = "0.1.0"
 
   project_id = "gcp-network"
@@ -53,7 +53,7 @@ If you would prefer to provide the specific IP addresses to be reserved, that ca
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/address/google"
+  source  = "terraform-google-modules/terraform-google-address"
   version = "0.1.0"
 
   subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
@@ -80,7 +80,7 @@ External IP addresses can be reserved by setting the `global` input var to `true
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/address/google"
+  source  = "terraform-google-modules/terraform-google-address"
   version = "0.1.0"
 
   names  = [ "external-facing-ip"]
@@ -97,14 +97,14 @@ managed zone name, the domain registered with Cloud DNS, and setting the
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/address/google"
+  source  = "terraform-google-modules/terraform-google-address"
   version = "0.1.0"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
   enable_gcp_dns       = true
-  gcp_dns_project      = "gcp-dns"
-  gcp_dns_domain       = "example.com"
-  gcp_dns_managed_zone = "nonprod-dns-zone"
+  dns_project      = "gcp-dns"
+  dns_domain       = "example.com"
+  dns_managed_zone = "nonprod-dns-zone"
 
   names = [
     "gusw1-dev-fooapp-fe-0001-a-001-ip",
@@ -124,20 +124,20 @@ module "address-fe" {
 
 The module also supports the ability to register reverse DNS entries within
 their own zone by setting the `enable_gcp_ptr` feature flag to `true` and
-specifying the zone with the `gcp_dns_reverse_zone` input variable:
+specifying the zone with the `dns_reverse_zone` input variable:
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/address/google"
+  source  = "terraform-google-modules/terraform-google-address"
   version = "0.1.0"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
   enable_gcp_dns       = true
   enable_gcp_ptr       = true
-  gcp_dns_project      = "gcp-dns"
-  gcp_dns_domain       = "example.com"
-  gcp_dns_managed_zone = "nonprod-dns-zone"
-  gcp_dns_reverse_zone = "nonprod-dns-reverse-zone"
+  dns_project      = "gcp-dns"
+  dns_domain       = "example.com"
+  dns_managed_zone = "nonprod-dns-zone"
+  dns_reverse_zone = "nonprod-dns-reverse-zone"
 
   names = [
     "gusw1-dev-fooapp-fe-0001-a-001-ip",
