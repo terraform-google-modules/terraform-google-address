@@ -219,7 +219,7 @@ Terraform may change this fact, but this is the current limitation.
 ## Requirements
 ### Terraform plugins
 - [Terraform](https://www.terraform.io/downloads.html) >= 0.13.0
-- [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) plugin v1.12.0
+- [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) >= 3.53
 
 ### Configure a Service Account
 In order to execute this module you must have a Service Account with the following roles:

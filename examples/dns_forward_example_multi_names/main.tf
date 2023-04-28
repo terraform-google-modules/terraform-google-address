@@ -15,9 +15,8 @@
  */
 
 locals {
-  randomized_name = "cft-address-test-${random_string.suffix.result}"
-  domain          = "justfortestingmultinames-${random_string.suffix.result}.local"
-  forward_zone    = "forward-example-multinames"
+  domain       = "justfortestingmultinames-${random_string.suffix.result}.local"
+  forward_zone = "forward-example-multinames"
 }
 
 module "address" {

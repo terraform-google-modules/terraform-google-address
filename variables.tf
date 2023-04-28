@@ -38,6 +38,7 @@ variable "addresses" {
 
 variable "global" {
   description = "The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork."
+  type        = bool
   default     = false
 }
 
@@ -55,6 +56,7 @@ variable "dns_domain" {
 
 variable "dns_project" {
   description = "The project where DNS A records will be configured."
+  type        = string
   default     = ""
 }
 
