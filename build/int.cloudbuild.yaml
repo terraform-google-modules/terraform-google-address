@@ -83,7 +83,7 @@ steps:
   args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExample --verbose --stage teardown']
 - id: create TestDnsForwardExampleMultiNames
   waitFor:
-    - TestDnsForwardExample
+    - create TestDnsForwardExample
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
   args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExampleMultiNames --verbose --stage init']
 - id: converge TestDnsForwardExampleMultiNames
