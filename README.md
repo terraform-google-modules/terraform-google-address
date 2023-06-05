@@ -21,7 +21,7 @@ following example:
 ```hcl
 module "address-fe" {
   source  = "terraform-google-modules/terraform-google-address"
-  version = "0.1.0"
+  version = "~> 3.1"
 
   project_id = "gcp-network"
   region = "us-west1"
