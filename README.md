@@ -129,7 +129,7 @@ specifying the zone with the `dns_reverse_zone` input variable:
 ```hcl
 module "address-fe" {
   source  = "terraform-google-modules/terraform-google-address"
-  version = "0.1.0"
+  version = "~> 3.1"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
   enable_gcp_dns       = true
