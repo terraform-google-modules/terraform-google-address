@@ -81,7 +81,7 @@ External IP addresses can be reserved by setting the `global` input var to `true
 ```hcl
 module "address-fe" {
   source  = "terraform-google-modules/terraform-google-address"
-  version = "0.1.0"
+  version = "~> 3.1"
 
   names  = [ "external-facing-ip"]
   global = true
