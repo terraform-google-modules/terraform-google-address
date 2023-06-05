@@ -1,4 +1,4 @@
-# [Google Address Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/terraform-google-address/)
+# [Google Address Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/address/google/)
 
 This terraform module provides the means to permanently reserve an [IP address](https://cloud.google.com/compute/docs/ip-addresses/)
 available to Google Cloud Platform (GCP) resources, and optionally create
@@ -20,7 +20,7 @@ following example:
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/terraform-google-address"
+  source  = "terraform-google-modules/address/google"
   version = "~> 3.1"
 
   project_id = "gcp-network"
@@ -53,7 +53,7 @@ If you would prefer to provide the specific IP addresses to be reserved, that ca
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/terraform-google-address"
+  source  = "terraform-google-modules/address/google"
   version = "~> 3.1"
 
   subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
@@ -80,7 +80,7 @@ External IP addresses can be reserved by setting the `global` input var to `true
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/terraform-google-address"
+  source  = "terraform-google-modules/address/google"
   version = "~> 3.1"
 
   names  = [ "external-facing-ip"]
@@ -97,7 +97,7 @@ managed zone name, the domain registered with Cloud DNS, and setting the
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/terraform-google-address"
+  source  = "terraform-google-modules/address/google"
   version = "~> 3.1"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
@@ -128,7 +128,7 @@ specifying the zone with the `dns_reverse_zone` input variable:
 
 ```hcl
 module "address-fe" {
-  source  = "terraform-google-modules/terraform-google-address"
+  source  = "terraform-google-modules/address/google"
   version = "~> 3.1"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
