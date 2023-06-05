@@ -18,8 +18,6 @@
   Locals configuration and validation
  *****************************************/
 locals {
-  dns_args_missing         = var.enable_cloud_dns && var.dns_domain == "" && var.dns_project == "" && var.dns_managed_zone == "" ? 1 : 0
-  ptr_args_missing         = var.enable_reverse_dns && var.dns_reverse_zone == "" ? 1 : 0
   dns_fqdns                = formatlist("%s.%s", var.dns_short_names, var.dns_domain)
   regional_addresses_count = var.global ? 0 : length(var.names)
   global_addresses_count   = var.global ? length(var.names) : 0
