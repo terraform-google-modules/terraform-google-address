@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1.3](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.2...v3.1.3) (2023-06-15)
+
+
+### Bug Fixes
+
+* fixes for tflint ([#89](https://github.com/terraform-google-modules/terraform-google-address/issues/89)) ([76f0701](https://github.com/terraform-google-modules/terraform-google-address/commit/76f07016b0c95cadc01912decf210b4ec94ba69e))
+
 ## [3.1.2](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.1...v3.1.2) (2022-11-03)
 
 
