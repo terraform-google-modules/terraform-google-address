@@ -3,7 +3,7 @@
 This example illustrates how to reserve a specific IP address (instead of
 allowing GCP to dynamically assign it from the subnet provided).
 
-[^]: (autogen_docs_start)
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -23,7 +23,7 @@ allowing GCP to dynamically assign it from the subnet provided).
 | project\_id | ID of the project being used |
 | region | Region being used |
 
-[^]: (autogen_docs_end)
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 To provision this example, run the following from within this directory:
 - `terraform init` to get the plugins
