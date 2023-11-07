@@ -43,7 +43,7 @@ steps:
   args: ['/bin/bash', '-c', 'cft test run TestIpAddressOnly --verbose --stage teardown']
 - id: create ip-address-with-specific-ip-local
   waitFor:
-    - prepare
+    - destroy ip-address-only-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
   args: ['/bin/bash', '-c', 'cft test run TestIpAddressWithSpecificIp --verbose --stage init']
 - id: converge ip-address-with-specific-ip-local
@@ -63,7 +63,7 @@ steps:
   args: ['/bin/bash', '-c', 'cft test run TestIpAddressWithSpecificIp --verbose --stage teardown']
 - id: create TestDnsForwardExample
   waitFor:
-    - prepare
+    - destroy ip-address-with-specific-ip-local
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
   args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExample --verbose --stage init']
 - id: converge TestDnsForwardExample
@@ -83,7 +83,7 @@ steps:
   args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExample --verbose --stage teardown']
 - id: create TestDnsForwardExampleMultiNames
   waitFor:
-    - prepare
+    - destroy TestDnsForwardExample
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
   args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExampleMultiNames --verbose --stage init']
 - id: converge TestDnsForwardExampleMultiNames
@@ -103,7 +103,7 @@ steps:
   args: ['/bin/bash', '-c', 'cft test run TestDnsForwardExampleMultiNames --verbose --stage teardown']
 - id: create TestDnsForwardAndReverse
   waitFor:
-    - prepare
+    - destroy TestDnsForwardExampleMultiNames
   name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
   args: ['/bin/bash', '-c', 'cft test run TestDnsForwardAndReverse --verbose --stage init ']
 - id: converge TestDnsForwardAndReverse
@@ -126,6 +126,6 @@ tags:
 - 'integration'
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '1.13'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '1.17'
 options:
   machineType: 'N1_HIGHCPU_8'
