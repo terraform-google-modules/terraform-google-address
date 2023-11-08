@@ -24,16 +24,16 @@ locals {
   dns_forward_record_count = var.enable_cloud_dns ? length(local.dns_fqdns) : 0
   dns_reverse_record_count = var.enable_reverse_dns ? length(local.dns_fqdns) : 0
   ip_addresses = concat(
-    google_compute_address.ip.*.address,
-    google_compute_global_address.global_ip.*.address,
+    google_compute_address.ip[*].address,
+    google_compute_global_address.global_ip[*].address,
   )
   ip_names = concat(
-    google_compute_address.ip.*.name,
-    google_compute_global_address.global_ip.*.name,
+    google_compute_address.ip[*].name,
+    google_compute_global_address.global_ip[*].name,
   )
   self_links = concat(
-    google_compute_address.ip.*.self_link,
-    google_compute_global_address.global_ip.*.self_link,
+    google_compute_address.ip[*].self_link,
+    google_compute_global_address.global_ip[*].self_link,
   )
   prefix_length = var.address_type == "EXTERNAL" || (var.address_type == "INTERNAL" && var.purpose == "PRIVATE_SERVICE_CONNECT") ? null : var.prefix_length
 

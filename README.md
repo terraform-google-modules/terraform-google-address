@@ -177,7 +177,7 @@ don't you run the risk of failing validation (at the least) or surfacing the
 dreaded `value of 'count' cannot be computed` error. Future versions of
 Terraform may change this fact, but this is the current limitation.
 
-[^]: (autogen_docs_start)
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -213,7 +213,7 @@ Terraform may change this fact, but this is the current limitation.
 | reverse\_dns\_fqdns | List of reverse DNS PTR records registered in Cloud DNS.  (e.g. ["1.2.11.10.in-addr.arpa", "2.2.11.10.in-addr.arpa"]) |
 | self\_links | List of URIs of the created address resources |
 
-[^]: (autogen_docs_end)
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 
 ## Requirements
