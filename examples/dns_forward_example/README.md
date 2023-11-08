@@ -5,7 +5,7 @@ time, and how to enable the Google Cloud DNS registration functionality that
 will register the IP addresses and their corresponding DNS names with Google
 Cloud DNS.
 
-[^]: (autogen_docs_start)
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -30,7 +30,7 @@ Cloud DNS.
 | project\_id | ID of the project being used |
 | region | Region being used |
 
-[^]: (autogen_docs_end)
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 To provision this example, run the following from within this directory:
 - `terraform init` to get the plugins

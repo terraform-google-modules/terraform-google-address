@@ -4,7 +4,7 @@ This example illustrates how to simply reserve an IP address that is
 dynamically assigned by GCP. Outputs have been provided to list the address
 itself as well as the resource name that corresponds.
 
-[^]: (autogen_docs_start)
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -23,7 +23,7 @@ itself as well as the resource name that corresponds.
 | project\_id | ID of the project being used |
 | region | Region being used |
 
-[^]: (autogen_docs_end)
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 To provision this example, run the following from within this directory:
 - `terraform init` to get the plugins

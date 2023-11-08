@@ -4,7 +4,7 @@ This example illustrates how to reserve multiple IP addresses at the same
 time, and how to enable the Google Cloud DNS registration functionality for
 both forward and reverse DNS lookup zones.
 
-[^]: (autogen_docs_start)
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -32,7 +32,7 @@ both forward and reverse DNS lookup zones.
 | reverse\_dns\_fqdns | List of reverse DNS PTR records registered in Cloud DNS. |
 | reverse\_zone | The GCP name of the reverse lookup DNS zone being used |
 
-[^]: (autogen_docs_end)
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 To provision this example, run the following from within this directory:
 - `terraform init` to get the plugins
