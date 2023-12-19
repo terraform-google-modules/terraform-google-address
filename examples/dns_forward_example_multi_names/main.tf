@@ -20,7 +20,9 @@ locals {
 }
 
 module "address" {
-  source           = "../../"
+  source  = "terraform-google-modules/address/google"
+  version = "~> 3.0"
+
   project_id       = var.project_id
   region           = var.region
   enable_cloud_dns = true

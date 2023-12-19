@@ -19,7 +19,9 @@ provider "google" {
 }
 
 module "address" {
-  source     = "../../"
+  source  = "terraform-google-modules/address/google"
+  version = "~> 3.0"
+
   project_id = var.project_id
   region     = var.region
   subnetwork = var.subnetwork
