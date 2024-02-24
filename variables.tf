@@ -131,3 +131,9 @@ variable "ip_version" {
   description = "The IP Version that will be used by this address."
   default     = "IPV4"
 }
+
+variable "labels" {
+  type        = map(string)
+  description = "Labels to apply to this address."
+  default     = {}
+}
