@@ -24,34 +24,29 @@ variable "region" {
   description = "The region to create the address in"
 }
 
-variable "names" {
-  description = "A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. [\"gusw1-dev-fooapp-fe-0001-a-001-ip\"])"
-  type        = list(string)
-  default     = []
-}
-
 variable "addresses" {
-  description = "A list of IP addresses to create.  GCP will reserve unreserved addresses if given the value \"\".  If multiple names are given the default value is sufficient to have multiple addresses automatically picked for each name."
-  type        = list(string)
-  default     = [""]
-}
-
-variable "global" {
-  description = "The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork."
-  type        = bool
-  default     = false
-}
-
-variable "dns_short_names" {
-  description = "A list of DNS short names to register within Cloud DNS.  Names corresponding to addresses must align by their list index position in the two input variables, `names` and `dns_short_names`.  If an empty list, no domain names are registered.  Multiple names may be registered to the same address by passing a single element list to names and multiple elements to dns_short_names.  (e.g. [\"gusw1-dev-fooapp-fe-0001-a-001\"])"
-  type        = list(string)
-  default     = []
-}
-
-variable "dns_domain" {
-  description = "The domain to append to DNS short names when registering in Cloud DNS."
-  type        = string
-  default     = ""
+  type = list(object({
+    name               = string
+    address            = optional(string, "")
+    address_type       = optional(string, "INTERNAL")
+    description        = optional(string, "")
+    region             = optional(string, "")
+    global             = optional(bool, false)
+    subnetwork         = optional(string, "")
+    ip_version         = optional(string, "")
+    labels             = optional(map(string))
+    purpose            = optional(string)
+    enable_cloud_dns   = optional(bool, false)
+    dns_short_name     = optional(string)
+    dns_domain         = optional(string, "")
+    dns_managed_zone   = optional(string, "")
+    dns_record_type    = optional(string, "")
+    dns_ttl            = optional(string, "")
+    dns_project        = optional(string, "")
+    enable_reverse_dns = optional(bool, false)
+    dns_reverse_zone   = optional(string, "")
+  }))
+  description = "IP addresses"
 }
 
 variable "dns_project" {
@@ -96,18 +91,6 @@ variable "address_type" {
   default     = "INTERNAL"
 }
 
-variable "enable_cloud_dns" {
-  description = "If a value is set, register records in Cloud DNS."
-  type        = bool
-  default     = false
-}
-
-variable "enable_reverse_dns" {
-  description = "If a value is set, register reverse DNS PTR records in Cloud DNS in the managed zone specified by dns_reverse_zone"
-  type        = bool
-  default     = false
-}
-
 variable "purpose" {
   type        = string
   description = "The purpose of the resource(GCE_ENDPOINT, SHARED_LOADBALANCER_VIP, VPC_PEERING)."
@@ -128,6 +111,6 @@ variable "prefix_length" {
 
 variable "ip_version" {
   type        = string
-  description = "The IP Version that will be used by this address."
+  description = "The IP Version that will be used by addresses."
   default     = "IPV4"
 }
