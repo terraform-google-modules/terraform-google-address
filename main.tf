@@ -23,7 +23,7 @@ locals {
   global_addresses_count   = var.global ? length(var.names) : 0
   dns_forward_record_count = var.enable_cloud_dns ? length(local.dns_fqdns) : 0
   dns_reverse_record_count = var.enable_reverse_dns ? length(local.dns_fqdns) : 0
-  ip_addresses = concat(
+  ip_addresses             = concat(
     google_compute_address.ip[*].address,
     google_compute_global_address.global_ip[*].address,
   )
@@ -41,7 +41,9 @@ locals {
   Format reverse DNS entries - see https://github.com/hashicorp/terraform/issues/9404
   *****************************************/
   split_ips     = [for ip in local.ip_addresses : split(".", ip)]
-  dns_ptr_fqdns = var.enable_reverse_dns ? [for split_ip in local.split_ips : "${split_ip[3]}.${split_ip[2]}.${split_ip[1]}.${split_ip[0]}.in-addr.arpa"] : []
+  dns_ptr_fqdns = var.enable_reverse_dns ? [
+    for split_ip in local.split_ips :"${split_ip[3]}.${split_ip[2]}.${split_ip[1]}.${split_ip[0]}.in-addr.arpa"
+  ] : []
 }
 
 /******************************************
@@ -70,7 +72,7 @@ resource "google_compute_global_address" "global_ip" {
   purpose       = var.global && var.address_type == "INTERNAL" ? "VPC_PEERING" : null
   prefix_length = local.prefix_length
   ip_version    = var.ip_version
-  description  = element(var.descriptions, count.index)
+  description   = element(var.descriptions, count.index)
 }
 
 /******************************************
