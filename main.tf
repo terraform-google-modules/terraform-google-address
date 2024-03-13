@@ -70,6 +70,7 @@ resource "google_compute_global_address" "global_ip" {
   purpose       = var.global && var.address_type == "INTERNAL" ? "VPC_PEERING" : null
   prefix_length = local.prefix_length
   ip_version    = var.ip_version
+  description  = element(var.descriptions, count.index)
 }
 
 /******************************************
