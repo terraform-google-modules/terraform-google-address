@@ -195,6 +195,7 @@ Terraform may change this fact, but this is the current limitation.
 | enable\_reverse\_dns | If a value is set, register reverse DNS PTR records in Cloud DNS in the managed zone specified by dns\_reverse\_zone | `bool` | `false` | no |
 | global | The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork. | `bool` | `false` | no |
 | ip\_version | The IP Version that will be used by this address. | `string` | `"IPV4"` | no |
+| labels | Labels to apply to this address. | `map(string)` | `{}` | no |
 | names | A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"]) | `list(string)` | `[]` | no |
 | network\_tier | The networking tier used for configuring this address. | `string` | `"PREMIUM"` | no |
 | prefix\_length | The prefix length of the IP range. | `number` | `16` | no |
@@ -219,7 +220,7 @@ Terraform may change this fact, but this is the current limitation.
 ## Requirements
 ### Terraform plugins
 - [Terraform](https://www.terraform.io/downloads.html) >= 0.13.0
-- [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) plugin v1.12.0
+- [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) plugin >= 5.2.0
 
 ### Configure a Service Account
 In order to execute this module you must have a Service Account with the following roles:
