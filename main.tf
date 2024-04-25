@@ -57,6 +57,7 @@ resource "google_compute_address" "ip" {
   address_type = var.address_type
   purpose      = var.address_type == "INTERNAL" ? var.purpose : null
   network_tier = var.address_type == "INTERNAL" ? null : var.network_tier
+  labels       = var.labels
 }
 
 resource "google_compute_global_address" "global_ip" {
