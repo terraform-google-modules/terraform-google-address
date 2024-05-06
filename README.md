@@ -93,7 +93,7 @@ module "address-fe" {
 Optionally, the IP addresses you reserve can be registered in Google Cloud
 DNS by providing information on the project hosting the Cloud DNS zone, the
 managed zone name, the domain registered with Cloud DNS, and setting the
-`enable_gcp_dns` feature flag to `true`:
+`enable_cloud_dns` feature flag to `true`:
 
 ```hcl
 module "address-fe" {
@@ -101,10 +101,10 @@ module "address-fe" {
   version = "~> 3.1"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
-  enable_gcp_dns       = true
-  dns_project      = "gcp-dns"
-  dns_domain       = "example.com"
-  dns_managed_zone = "nonprod-dns-zone"
+  enable_cloud_dns     = true
+  dns_project          = "gcp-dns"
+  dns_domain           = "example.com"
+  dns_managed_zone     = "nonprod-dns-zone"
 
   names = [
     "gusw1-dev-fooapp-fe-0001-a-001-ip",
@@ -132,12 +132,12 @@ module "address-fe" {
   version = "~> 3.1"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
-  enable_gcp_dns       = true
+  enable_cloud_dns     = true
   enable_gcp_ptr       = true
-  dns_project      = "gcp-dns"
-  dns_domain       = "example.com"
-  dns_managed_zone = "nonprod-dns-zone"
-  dns_reverse_zone = "nonprod-dns-reverse-zone"
+  dns_project          = "gcp-dns"
+  dns_domain           = "example.com"
+  dns_managed_zone     = "nonprod-dns-zone"
+  dns_reverse_zone     = "nonprod-dns-reverse-zone"
 
   names = [
     "gusw1-dev-fooapp-fe-0001-a-001-ip",
