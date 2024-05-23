@@ -83,7 +83,7 @@ module "address-fe" {
   source  = "terraform-google-modules/address/google"
   version = "~> 3.1"
 
-  names  = [ "external-facing-ip"]
+  names  = ["external-facing-ip"]
   global = true
 }
 ```
