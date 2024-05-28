@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.2.0...v4.0.0) (2024-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* **TPG>=5.2:** support labelling regional IPs ([#116](https://github.com/terraform-google-modules/terraform-google-address/issues/116))
+
+### Features
+
+* **TPG>=5.2:** support labelling regional IPs ([#116](https://github.com/terraform-google-modules/terraform-google-address/issues/116)) ([48bcee6](https://github.com/terraform-google-modules/terraform-google-address/commit/48bcee60ec9eddc7d096d53c0af1604db1f15a74))
+
 ## [3.2.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v3.1.3...v3.2.0) (2023-11-27)
 
 
