@@ -18,7 +18,7 @@
   Locals configuration and validation
  *****************************************/
 locals {
-  dns_fqdns = formatlist("%s.%s", var.dns_short_names, var.dns_domain)
+  dns_fqdns                = formatlist("%s.%s", var.dns_short_names, var.dns_domain)
   regional_addresses_count = var.global ? 0 : length(var.names)
   global_addresses_count   = var.global ? length(var.names) : 0
   dns_forward_record_count = var.enable_cloud_dns ? length(local.dns_fqdns) : 0
