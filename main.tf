@@ -18,7 +18,7 @@
   Locals configuration and validation
  *****************************************/
 locals {
-  dns_fqdns                = formatlist("%s.%s", var.dns_short_names, var.dns_domain)
+  dns_fqdns = formatlist("%s.%s", var.dns_short_names, var.dns_domain)
   regional_addresses_count = var.global ? 0 : length(var.names)
   global_addresses_count   = var.global ? length(var.names) : 0
   dns_forward_record_count = var.enable_cloud_dns ? length(local.dns_fqdns) : 0
@@ -58,6 +58,7 @@ resource "google_compute_address" "ip" {
   purpose      = var.address_type == "INTERNAL" ? var.purpose : null
   network_tier = var.address_type == "INTERNAL" ? null : var.network_tier
   labels       = var.labels
+  description  = element(var.descriptions, count.index)
 }
 
 resource "google_compute_global_address" "global_ip" {
@@ -70,6 +71,7 @@ resource "google_compute_global_address" "global_ip" {
   purpose       = var.global && var.address_type == "INTERNAL" ? "VPC_PEERING" : null
   prefix_length = local.prefix_length
   ip_version    = var.ip_version
+  description   = element(var.descriptions, count.index)
 }
 
 /******************************************
