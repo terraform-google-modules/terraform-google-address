@@ -184,7 +184,7 @@ Terraform may change this fact, but this is the current limitation.
 |------|-------------|------|---------|:--------:|
 | address\_type | The type of address to reserve, either "INTERNAL" or "EXTERNAL". If unspecified, defaults to "INTERNAL". | `string` | `"INTERNAL"` | no |
 | addresses | A list of IP addresses to create.  GCP will reserve unreserved addresses if given the value "".  If multiple names are given the default value is sufficient to have multiple addresses automatically picked for each name. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
-| descriptions | A list of descriptions to add to each address. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| descriptions | A list of descriptions to add to each address. | `list(string)` | `[]` | no |
 | dns\_domain | The domain to append to DNS short names when registering in Cloud DNS. | `string` | `""` | no |
 | dns\_managed\_zone | The name of the managed zone to create records within.  This managed zone must exist in the host project. | `string` | `""` | no |
 | dns\_project | The project where DNS A records will be configured. | `string` | `""` | no |
