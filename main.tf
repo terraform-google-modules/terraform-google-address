@@ -58,7 +58,7 @@ resource "google_compute_address" "ip" {
   purpose      = var.address_type == "INTERNAL" ? var.purpose : null
   network_tier = var.address_type == "INTERNAL" ? null : var.network_tier
   labels       = var.labels
-  description  = element(var.descriptions, count.index)
+  description  = try(element(var.descriptions, count.index), null)
 }
 
 resource "google_compute_global_address" "global_ip" {
@@ -71,7 +71,7 @@ resource "google_compute_global_address" "global_ip" {
   purpose       = var.global && var.address_type == "INTERNAL" ? "VPC_PEERING" : null
   prefix_length = local.prefix_length
   ip_version    = var.ip_version
-  description   = element(var.descriptions, count.index)
+  description  = try(element(var.descriptions, count.index), null)
 }
 
 /******************************************
