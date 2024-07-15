@@ -137,3 +137,9 @@ variable "labels" {
   description = "Labels to apply to this address."
   default     = {}
 }
+
+variable "descriptions" {
+  description = "A list of descriptions to add to each address."
+  type        = list(string)
+  default     = []
+}
