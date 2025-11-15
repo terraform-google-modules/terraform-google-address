@@ -7,7 +7,7 @@ address resource which exists independent of the lifecycle of the resources
 that require the address.
 
 ## Compatibility
-This module is meant for use with Terraform 0.13. If you haven't
+This module is meant for use with Terraform 0.13+. If you haven't
 [upgraded](https://www.terraform.io/upgrade-guides/0-13.html) and need a Terraform
 0.12.x-compatible version of this module, the last released version
 intended for Terraform 0.12.x is [v2.1.1](https://registry.terraform.io/modules/terraform-google-modules/-address/google/v2.1.1).
@@ -54,7 +54,7 @@ If you would prefer to provide the specific IP addresses to be reserved, that ca
 ```hcl
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
-  version = "~> 3.1"
+  version = "~> 4.1"
 
   subnetwork = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
 
@@ -81,7 +81,7 @@ External IP addresses can be reserved by setting the `global` input var to `true
 ```hcl
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
-  version = "~> 3.1"
+  version = "~> 4.1"
 
   names  = ["external-facing-ip"]
   global = true
@@ -98,7 +98,7 @@ managed zone name, the domain registered with Cloud DNS, and setting the
 ```hcl
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
-  version = "~> 3.1"
+  version = "~> 4.1"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
   enable_cloud_dns     = true
@@ -129,7 +129,7 @@ specifying the zone with the `dns_reverse_zone` input variable:
 ```hcl
 module "address-fe" {
   source  = "terraform-google-modules/address/google"
-  version = "~> 3.1"
+  version = "~> 4.1"
 
   subnetwork           = "projects/gcp-network/regions/us-west1/subnetworks/dev-us-west1-dynamic"
   enable_cloud_dns     = true
@@ -221,7 +221,7 @@ Terraform may change this fact, but this is the current limitation.
 ## Requirements
 ### Terraform plugins
 - [Terraform](https://www.terraform.io/downloads.html) >= 0.13.0
-- [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) plugin >= 5.2.0
+- [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) plugin >= 6.2.0
 
 ### Configure a Service Account
 In order to execute this module you must have a Service Account with the following roles:
@@ -260,7 +260,7 @@ NOTE: These APIs are enabled by default on the host project passed in to the `./
 ## Install
 
 ### Terraform
-Be sure you have the correct Terraform version (0.12.x), you can choose the binary here:
+Be sure you have the correct Terraform version (0.13.x+), you can choose the binary here:
 - https://releases.hashicorp.com/terraform/
 
 ## File structure
