@@ -1,0 +1,185 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: blueprints.cloud.google.com/v1alpha1
+kind: BlueprintMetadata
+metadata:
+  name: terraform-google-address
+  annotations:
+    config.kubernetes.io/local-config: "true"
+spec:
+  info:
+    source:
+      repo: https://github.com/Umm-E-Kulsum/terraform-google-address.git
+      sourceType: git
+    version: 4.2.0
+    actuationTool:
+      flavor: Terraform
+      version: ">= 0.13"
+    description: {}
+  content:
+    examples:
+      - name: dns_forward_and_reverse
+        location: examples/dns_forward_and_reverse
+      - name: dns_forward_example
+        location: examples/dns_forward_example
+      - name: dns_forward_example_multi_names
+        location: examples/dns_forward_example_multi_names
+      - name: global_external_address
+        location: examples/global_external_address
+      - name: internal_with_dynamic_ip
+        location: examples/internal_with_dynamic_ip
+      - name: internal_with_specific_ip
+        location: examples/internal_with_specific_ip
+      - name: ip_address_only
+        location: examples/ip_address_only
+      - name: ip_address_with_specific_ip
+        location: examples/ip_address_with_specific_ip
+      - name: regional_external_address
+        location: examples/regional_external_address
+  interfaces:
+    variables:
+      - name: project_id
+        description: The project ID to create the address in
+        varType: string
+        required: true
+      - name: region
+        description: The region to create the address in
+        varType: string
+        required: true
+      - name: names
+        description: A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"])
+        varType: list(string)
+        defaultValue: []
+      - name: addresses
+        description: A list of IP addresses to create.  GCP will reserve unreserved addresses if given the value "".  If multiple names are given the default value is sufficient to have multiple addresses automatically picked for each name.
+        varType: list(string)
+        defaultValue:
+          - ""
+      - name: global
+        description: The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork.
+        varType: bool
+        defaultValue: false
+      - name: dns_short_names
+        description: A list of DNS short names to register within Cloud DNS.  Names corresponding to addresses must align by their list index position in the two input variables, `names` and `dns_short_names`.  If an empty list, no domain names are registered.  Multiple names may be registered to the same address by passing a single element list to names and multiple elements to dns_short_names.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001"])
+        varType: list(string)
+        defaultValue: []
+      - name: dns_domain
+        description: The domain to append to DNS short names when registering in Cloud DNS.
+        varType: string
+        defaultValue: ""
+      - name: dns_project
+        description: The project where DNS A records will be configured.
+        varType: string
+        defaultValue: ""
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-dns
+              version: ~> 5.2
+            spec:
+              outputExpr: project_id
+      - name: dns_ttl
+        description: The DNS TTL in seconds for records created in Cloud DNS.  The default value should be used unless the application demands special handling.
+        varType: number
+        defaultValue: 300
+      - name: dns_managed_zone
+        description: The name of the managed zone to create records within.  This managed zone must exist in the host project.
+        varType: string
+        defaultValue: ""
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-dns
+              version: ~> 5.2
+            spec:
+              outputExpr: name
+      - name: dns_reverse_zone
+        description: The name of the managed zone to create PTR records within.  This managed zone must exist in the host project.
+        varType: string
+        defaultValue: ""
+      - name: dns_record_type
+        description: The type of records to create in the managed zone.  (e.g. "A")
+        varType: string
+        defaultValue: A
+      - name: subnetwork
+        description: The subnet containing the address.  For EXTERNAL addresses use the empty string, "".  (e.g. "projects/<project-name>/regions/<region-name>/subnetworks/<subnetwork-name>")
+        varType: string
+        defaultValue: ""
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-network//modules/subnets
+              version: ~> 6.0
+            spec:
+              outputExpr: subnets[0].self_link
+      - name: address_type
+        description: The type of address to reserve, either "INTERNAL" or "EXTERNAL". If unspecified, defaults to "INTERNAL".
+        varType: string
+        defaultValue: INTERNAL
+      - name: enable_cloud_dns
+        description: If a value is set, register records in Cloud DNS.
+        varType: bool
+        defaultValue: false
+      - name: enable_reverse_dns
+        description: If a value is set, register reverse DNS PTR records in Cloud DNS in the managed zone specified by dns_reverse_zone
+        varType: bool
+        defaultValue: false
+      - name: purpose
+        description: The purpose of the resource(GCE_ENDPOINT, SHARED_LOADBALANCER_VIP, VPC_PEERING).
+        varType: string
+        defaultValue: GCE_ENDPOINT
+      - name: network_tier
+        description: The networking tier used for configuring this address.
+        varType: string
+        defaultValue: PREMIUM
+      - name: prefix_length
+        description: The prefix length of the IP range.
+        varType: number
+        defaultValue: 16
+      - name: ip_version
+        description: The IP Version that will be used by this address.
+        varType: string
+        defaultValue: IPV4
+      - name: labels
+        description: Labels to apply to this address.
+        varType: map(string)
+        defaultValue: {}
+      - name: descriptions
+        description: A list of descriptions to add to each address.
+        varType: list(string)
+        defaultValue: []
+    outputs:
+      - name: addresses
+        description: List of address values managed by this module (e.g. ["1.2.3.4"])
+      - name: dns_fqdns
+        description: List of DNS fully qualified domain names registered in Cloud DNS.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001.example.com", "gusw1-dev-fooapp-fe-0001-a-0002.example.com"])
+      - name: names
+        description: List of address resource names managed by this module (e.g. ["gusw1-dev-fooapp-fe-0001-a-0001-ip"])
+      - name: reverse_dns_fqdns
+        description: List of reverse DNS PTR records registered in Cloud DNS.  (e.g. ["1.2.11.10.in-addr.arpa", "2.2.11.10.in-addr.arpa"])
+      - name: self_links
+        description: List of URIs of the created address resources
+  requirements:
+    roles:
+      - level: Project
+        roles:
+          - roles/compute.networkAdmin
+          - roles/dns.admin
+          - roles/iam.serviceAccountUser
+    services:
+      - oslogin.googleapis.com
+      - cloudresourcemanager.googleapis.com
+      - compute.googleapis.com
+      - dns.googleapis.com
+    providerVersions:
+      - source: hashicorp/google
+        version: ">= 5.2, < 8"
