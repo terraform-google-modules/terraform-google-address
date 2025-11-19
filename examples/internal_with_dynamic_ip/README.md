@@ -9,6 +9,7 @@ IP addresses with the addresses dynamically assigned by Google Cloud.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | project\_id | The Google Cloud project ID to deploy to | `string` | n/a | yes |
+| region | The region to host the network. | `string` | `"asia-east1"` | no |
 
 ## Outputs
 
