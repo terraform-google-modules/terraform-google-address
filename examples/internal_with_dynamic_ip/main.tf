@@ -39,6 +39,7 @@ resource "google_compute_subnetwork" "test_subnet" {
 
 module "address" {
   source     = "terraform-google-modules/address/google"
+  version    = "~> 4.0"
   project_id = var.project_id
   region     = var.region
   subnetwork = google_compute_subnetwork.test_subnet.self_link
