@@ -14,35 +14,14 @@
  * limitations under the License.
  */
 
-// We declare 'region' because it is not defined elsewhere in this example.
-// We DO NOT declare 'project_id' because it IS defined elsewhere.
-variable "region" {
-  description = "The region to host the network."
-  default     = "asia-east1"
-}
-
-// Create the VPC network
-resource "google_compute_network" "test_net" {
-  name                    = "cft-test-net-internal-ip"
-  auto_create_subnetworks = false
-  project                 = var.project_id
-}
-
-// Create the 'my-subnet' subnetwork with a range that includes this test's static IPs
-resource "google_compute_subnetwork" "test_subnet" {
-  name          = "my-subnet"
-  ip_cidr_range = "10.0.0.0/24"
-  region        = var.region
-  network       = google_compute_network.test_net.self_link
-  project       = var.project_id
-}
-
+# [START compute_internal_ip_create]
 module "address" {
   source     = "terraform-google-modules/address/google"
   version    = "~> 4.0"
-  project_id = var.project_id
-  region     = var.region
-  subnetwork = google_compute_subnetwork.test_subnet.self_link
+  project_id = var.project_id # Replace this with your project ID in quotes
+  region     = "asia-east1"
+  subnetwork = "my-subnet"
   names      = ["internal-address1", "internal-address2"]
   addresses  = ["10.0.0.3", "10.0.0.4"]
 }
+# [END compute_internal_ip_create]
