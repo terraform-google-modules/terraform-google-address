@@ -38,7 +38,7 @@ resource "google_compute_subnetwork" "test_subnet" {
 }
 
 module "address" {
-  source     = "Umm-E-Kulsum/address/google"
+  source     = "terraform-google-modules/address/google"
   project_id = var.project_id
   region     = var.region
   subnetwork = google_compute_subnetwork.test_subnet.self_link
