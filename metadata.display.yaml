@@ -29,6 +29,7 @@ spec:
         address_type:
           name: address_type
           title: Address Type
+          level: 1
         addresses:
           name: addresses
           title: Addresses
@@ -74,6 +75,7 @@ spec:
         names:
           name: names
           title: Names
+          level: 1
         network_tier:
           name: network_tier
           title: Network Tier
@@ -92,3 +94,4 @@ spec:
         subnetwork:
           name: subnetwork
           title: Subnetwork
+          level: 1
