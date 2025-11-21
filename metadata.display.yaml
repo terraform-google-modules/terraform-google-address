@@ -21,7 +21,7 @@ metadata:
 spec:
   info:
     source:
-      repo: https://github.com/Umm-E-Kulsum/terraform-google-address.git
+      repo: https://github.com/terraform-google-modules/terraform-google-address.git
       sourceType: git
   ui:
     input:
