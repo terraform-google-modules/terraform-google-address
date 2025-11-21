@@ -85,7 +85,7 @@ spec:
         defaultValue: ""
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-dns
+              source: https://github.com/terraform-google-modules/terraform-google-cloud-dns
               version: ~> 5.2
             spec:
               outputExpr: project_id
@@ -99,7 +99,7 @@ spec:
         defaultValue: ""
         connections:
           - source:
-              source: github.com/terraform-google-modules/terraform-google-dns
+              source: https://github.com/terraform-google-modules/terraform-google-cloud-dns
               version: ~> 5.2
             spec:
               outputExpr: name
