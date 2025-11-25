@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.3.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v4.2.0...v4.3.0) (2025-11-24)
+
+
+### Features
+
+* **testing:** Update Makefile and fix broken tests for onboarding to ADC ([#165](https://github.com/terraform-google-modules/terraform-google-address/issues/165)) ([bbe0dba](https://github.com/terraform-google-modules/terraform-google-address/commit/bbe0dbabf2b08b274399bb6aa212bb432d76d70c))
+
 ## [4.2.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v4.1.0...v4.2.0) (2025-08-28)
 
 
