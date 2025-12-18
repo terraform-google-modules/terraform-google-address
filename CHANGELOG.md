@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.4.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v4.3.0...v4.4.0) (2025-12-18)
+
+
+### Features
+
+* **output types:** Change output types to list of strings ([#169](https://github.com/terraform-google-modules/terraform-google-address/issues/169)) ([bb3574b](https://github.com/terraform-google-modules/terraform-google-address/commit/bb3574b516870052d5ec0bd8525c3c3081a88bf2))
+* **testing:** Update Makefile and sync the code ([#168](https://github.com/terraform-google-modules/terraform-google-address/issues/168)) ([c1a0bc3](https://github.com/terraform-google-modules/terraform-google-address/commit/c1a0bc3cf3df22650e26227fbd94cf36e1c64bc3))
+
 ## [4.3.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v4.2.0...v4.3.0) (2025-11-24)
 
 
