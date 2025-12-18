@@ -161,8 +161,8 @@ spec:
       - name: addresses
         description: List of address values managed by this module (e.g. ["1.2.3.4"])
         type:
-          - tuple
-          - []
+          - list
+          - string
       - name: dns_fqdns
         description: List of DNS fully qualified domain names registered in Cloud DNS.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001.example.com", "gusw1-dev-fooapp-fe-0001-a-0002.example.com"])
         type:
@@ -171,18 +171,18 @@ spec:
       - name: names
         description: List of address resource names managed by this module (e.g. ["gusw1-dev-fooapp-fe-0001-a-0001-ip"])
         type:
-          - tuple
-          - []
+          - list
+          - string
       - name: reverse_dns_fqdns
         description: List of reverse DNS PTR records registered in Cloud DNS.  (e.g. ["1.2.11.10.in-addr.arpa", "2.2.11.10.in-addr.arpa"])
         type:
-          - tuple
-          - []
+          - list
+          - string
       - name: self_links
         description: List of URIs of the created address resources
         type:
-          - tuple
-          - []
+          - list
+          - string
   requirements:
     roles:
       - level: Project
