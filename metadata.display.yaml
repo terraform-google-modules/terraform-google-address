@@ -95,3 +95,9 @@ spec:
           name: subnetwork
           title: Subnetwork
           level: 1
+    runtime:
+      outputs:
+        addresses:
+          visibility: VISIBILITY_ROOT
+        dns_fqdns:
+          visibility: VISIBILITY_ROOT
