@@ -166,7 +166,6 @@ spec:
       - name: dns_fqdns
         description: List of DNS fully qualified domain names registered in Cloud DNS.  (e.g. ["gusw1-dev-fooapp-fe-0001-a-001.example.com", "gusw1-dev-fooapp-fe-0001-a-0002.example.com"])
         type:
-          - list
           - string
       - name: names
         description: List of address resource names managed by this module (e.g. ["gusw1-dev-fooapp-fe-0001-a-0001-ip"])
