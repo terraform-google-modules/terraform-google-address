@@ -75,7 +75,6 @@ spec:
         names:
           name: names
           title: Names
-          level: 1
         network_tier:
           name: network_tier
           title: Network Tier
@@ -95,3 +94,9 @@ spec:
           name: subnetwork
           title: Subnetwork
           level: 1
+    runtime:
+      outputs:
+        addresses:
+          visibility: VISIBILITY_ROOT
+        dns_fqdns:
+          visibility: VISIBILITY_ROOT
