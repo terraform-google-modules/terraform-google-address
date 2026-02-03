@@ -25,8 +25,15 @@ variable "region" {
 }
 
 variable "names" {
-  description = "A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. [\"gusw1-dev-fooapp-fe-0001-a-001-ip\"])"
+  description = "A list of IP address resource names to create. This is the GCP resource name and not the associated hostname of the IP address. Existing resource names may be found with `gcloud compute addresses list` (e.g. [\"gusw1-dev-fooapp-fe-0001-a-001-ip\"])"
   type        = list(string)
+
+  validation {
+    condition = alltrue([
+      for n in var.names : can(regex("^[a-z]([-a-z0-9]*[a-z0-9])?$", n)) && length(n) <= 63
+    ])
+    error_message = "Each name must be 1-63 chars, start with lowercase, and be RFC1035 compliant."
+  }
 }
 
 variable "addresses" {
