@@ -197,7 +197,7 @@ Terraform may change this fact, but this is the current limitation.
 | global | The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork. | `bool` | `false` | no |
 | ip\_version | The IP Version that will be used by this address. | `string` | `"IPV4"` | no |
 | labels | Labels to apply to this address. | `map(string)` | `{}` | no |
-| names | A list of IP address resource names to create. This is the GCP resource name and not the associated hostname of the IP address. Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"]) | `list(string)` | `[]` | no |
+| names | A list of IP address resource names to create. This is the GCP resource name and not the associated hostname of the IP address. Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"]) | `list(string)` | n/a | yes |
 | network\_tier | The networking tier used for configuring this address. | `string` | `"PREMIUM"` | no |
 | prefix\_length | The prefix length of the IP range. | `number` | `16` | no |
 | project\_id | The project ID to create the address in | `string` | n/a | yes |
