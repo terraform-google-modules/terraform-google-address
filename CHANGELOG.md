@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v4.4.0...v5.0.0) (2026-02-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* Expose output addresses and also validate the input variable and make names required ([#173](https://github.com/terraform-google-modules/terraform-google-address/issues/173))
+
+### Features
+
+* Expose output addresses and also validate the input variable and make names required ([#173](https://github.com/terraform-google-modules/terraform-google-address/issues/173)) ([6244a51](https://github.com/terraform-google-modules/terraform-google-address/commit/6244a51882f03ba64f39b9da3bc0f793c789d8bb))
+
 ## [4.4.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v4.3.0...v4.4.0) (2025-12-18)
 
 
