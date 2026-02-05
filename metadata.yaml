@@ -61,7 +61,7 @@ spec:
       - name: names
         description: A list of IP address resource names to create.  This is the GCP resource name and not the associated hostname of the IP address.  Existing resource names may be found with `gcloud compute addresses list` (e.g. ["gusw1-dev-fooapp-fe-0001-a-001-ip"])
         varType: list(string)
-        defaultValue: []
+        required: true
       - name: addresses
         description: A list of IP addresses to create.  GCP will reserve unreserved addresses if given the value "".  If multiple names are given the default value is sufficient to have multiple addresses automatically picked for each name.
         varType: list(string)

@@ -75,7 +75,8 @@ spec:
         names:
           name: names
           title: Names
-          level: 1
+          regexValidation: "^[a-z]([-a-z0-9]*[a-z0-9])?$"
+          validation: "Each name must be 1-63 chars, start with lowercase, and be RFC1035 compliant."
         network_tier:
           name: network_tier
           title: Network Tier
@@ -95,3 +96,7 @@ spec:
           name: subnetwork
           title: Subnetwork
           level: 1
+    runtime:
+      outputs:
+        addresses:
+          visibility: VISIBILITY_ROOT
