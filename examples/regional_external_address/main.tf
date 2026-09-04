@@ -17,7 +17,7 @@
 # [START compute_external_ip_create]
 module "address" {
   source       = "terraform-google-modules/address/google"
-  version      = "~> 4.0"
+  version      = "~> 5.0"
   project_id   = var.project_id # Replace this with your service project ID in quotes
   region       = "europe-west1"
   address_type = "EXTERNAL"
