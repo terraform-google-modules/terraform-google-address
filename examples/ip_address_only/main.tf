@@ -25,6 +25,6 @@ module "address" {
   project_id = var.project_id
   region     = var.region
   subnetwork = var.subnetwork
-  names      = var.names
+  addresses  = [for name in var.names : { name = name }]
 }
 

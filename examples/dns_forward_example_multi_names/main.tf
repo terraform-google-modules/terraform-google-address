@@ -29,13 +29,15 @@ module "address" {
   dns_domain       = local.domain
   dns_managed_zone = google_dns_managed_zone.forward.name
   dns_project      = var.project_id
-  names = [
-    "dynamically-reserved-ip-040",
-  ]
-  dns_short_names = [
-    "testip-041",
-    "testip-042",
-    "testip-043",
+  addresses = [
+    {
+      name = "dynamically-reserved-ip-040"
+      dns_short_names = [
+        "testip-041",
+        "testip-042",
+        "testip-043",
+      ]
+    }
   ]
   address_type = "EXTERNAL"
 }
