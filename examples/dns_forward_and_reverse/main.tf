@@ -20,7 +20,7 @@ provider "google" {
 
 module "address" {
   source  = "terraform-google-modules/address/google"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   project_id         = var.project_id
   region             = var.region
