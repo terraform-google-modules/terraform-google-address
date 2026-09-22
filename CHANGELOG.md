@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.1.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v5.0.0...v5.1.0) (2026-09-22)
+
+
+### Features
+
+* **deps:** Update Terraform Google Provider to v8 ([#181](https://github.com/terraform-google-modules/terraform-google-address/issues/181)) ([ebb291f](https://github.com/terraform-google-modules/terraform-google-address/commit/ebb291fdc12384d4ef5a993451f474f2afbf4012))
+
 ## [5.0.0](https://github.com/terraform-google-modules/terraform-google-address/compare/v4.4.0...v5.0.0) (2026-02-05)
 
 
