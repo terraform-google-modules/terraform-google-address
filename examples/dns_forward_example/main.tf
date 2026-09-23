@@ -29,7 +29,11 @@ module "address" {
   dns_domain       = var.dns_domain
   dns_managed_zone = var.dns_managed_zone
   dns_project      = var.dns_project
-  names            = var.names
-  dns_short_names  = var.dns_short_names
+  addresses = [
+    for index, name in var.names : {
+      name            = name
+      dns_short_names = [var.dns_short_names[index]]
+    }
+  ]
 }
 

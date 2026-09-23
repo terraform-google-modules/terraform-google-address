@@ -21,6 +21,9 @@ module "address" {
   project_id = var.project_id # Replace this with your project ID in quotes
   region     = "asia-east1"
   subnetwork = "my-subnet"
-  names      = ["internal-address1", "internal-address2"]
+  addresses = [
+    { name = "internal-address1" },
+    { name = "internal-address2" },
+  ]
 }
 # [END compute_internal_ip_create]

@@ -16,136 +16,139 @@
 
 variable "project_id" {
   type        = string
-  description = "The project ID to create the address in"
+  description = "The project ID to create the addresses in"
 }
 
 variable "region" {
   type        = string
-  description = "The region to create the address in"
-}
-
-variable "names" {
-  description = "A list of IP address resource names to create. This is the GCP resource name and not the associated hostname of the IP address. Existing resource names may be found with `gcloud compute addresses list` (e.g. [\"gusw1-dev-fooapp-fe-0001-a-001-ip\"])"
-  type        = list(string)
-
-  validation {
-    condition = alltrue([
-      for n in var.names : can(regex("^[a-z]([-a-z0-9]*[a-z0-9])?$", n)) && length(n) <= 63
-    ])
-    error_message = "Each name must be 1-63 chars, start with lowercase, and be RFC1035 compliant."
-  }
+  description = "The default region to create regional addresses in. May be overridden per address with the `region` attribute."
 }
 
 variable "addresses" {
-  description = "A list of IP addresses to create.  GCP will reserve unreserved addresses if given the value \"\".  If multiple names are given the default value is sufficient to have multiple addresses automatically picked for each name."
-  type        = list(string)
-  default     = [""]
+  description = "A list of IP addresses to reserve, keyed by `name`. Each attribute left unset (`null`) falls back to the matching module-level variable when one exists. Set `address` to reserve a specific IP, leave it unset to let GCP pick one. Set `global` to true for a global address. `dns_short_names` registers forward DNS records for the address when `enable_cloud_dns` is set, and the first short name is used for the PTR record when `enable_reverse_dns` is set."
+  type = list(object({
+    name               = string
+    address            = optional(string)
+    description        = optional(string)
+    region             = optional(string)
+    global             = optional(bool, false)
+    address_type       = optional(string)
+    subnetwork         = optional(string)
+    ip_version         = optional(string)
+    labels             = optional(map(string))
+    purpose            = optional(string)
+    network_tier       = optional(string)
+    prefix_length      = optional(number)
+    enable_cloud_dns   = optional(bool)
+    enable_reverse_dns = optional(bool)
+    dns_short_names    = optional(list(string), [])
+    dns_domain         = optional(string)
+    dns_managed_zone   = optional(string)
+    dns_reverse_zone   = optional(string)
+    dns_record_type    = optional(string)
+    dns_ttl            = optional(number)
+    dns_project        = optional(string)
+  }))
+
+  validation {
+    condition = alltrue([
+      for addr in var.addresses : can(regex("^[a-z]([-a-z0-9]*[a-z0-9])?$", addr.name)) && length(addr.name) <= 63
+    ])
+    error_message = "Each name must be 1-63 chars, start with lowercase, and be RFC1035 compliant."
+  }
+
+  validation {
+    condition     = length(distinct([for addr in var.addresses : addr.name])) == length(var.addresses)
+    error_message = "Address names must be unique."
+  }
 }
 
-variable "global" {
-  description = "The scope in which the address should live. If set to true, the IP address will be globally scoped. Defaults to false, i.e. regionally scoped. When set to true, do not provide a subnetwork."
-  type        = bool
-  default     = false
-}
-
-variable "dns_short_names" {
-  description = "A list of DNS short names to register within Cloud DNS.  Names corresponding to addresses must align by their list index position in the two input variables, `names` and `dns_short_names`.  If an empty list, no domain names are registered.  Multiple names may be registered to the same address by passing a single element list to names and multiple elements to dns_short_names.  (e.g. [\"gusw1-dev-fooapp-fe-0001-a-001\"])"
-  type        = list(string)
-  default     = []
-}
-
-variable "dns_domain" {
-  description = "The domain to append to DNS short names when registering in Cloud DNS."
+variable "dns_project" {
+  description = "The default project where DNS records will be configured. Falls back to `project_id` if unset."
   type        = string
   default     = ""
 }
 
-variable "dns_project" {
-  description = "The project where DNS A records will be configured."
+variable "dns_domain" {
+  description = "The default domain to append to DNS short names when registering in Cloud DNS."
   type        = string
   default     = ""
 }
 
 variable "dns_ttl" {
   type        = number
-  description = "The DNS TTL in seconds for records created in Cloud DNS.  The default value should be used unless the application demands special handling."
+  description = "The default DNS TTL in seconds for records created in Cloud DNS.  The default value should be used unless the application demands special handling."
   default     = 300
 }
 
 variable "dns_managed_zone" {
   type        = string
-  description = "The name of the managed zone to create records within.  This managed zone must exist in the host project."
+  description = "The default name of the managed zone to create records within.  This managed zone must exist in the host project."
   default     = ""
 }
 
 variable "dns_reverse_zone" {
   type        = string
-  description = "The name of the managed zone to create PTR records within.  This managed zone must exist in the host project."
+  description = "The default name of the managed zone to create PTR records within.  This managed zone must exist in the host project."
   default     = ""
 }
 
 variable "dns_record_type" {
   type        = string
-  description = "The type of records to create in the managed zone.  (e.g. \"A\")"
+  description = "The default type of records to create in the managed zone.  (e.g. \"A\")"
   default     = "A"
 }
 
-variable "subnetwork" {
-  type        = string
-  description = "The subnet containing the address.  For EXTERNAL addresses use the empty string, \"\".  (e.g. \"projects/<project-name>/regions/<region-name>/subnetworks/<subnetwork-name>\")"
-  default     = ""
-}
-
-variable "address_type" {
-  type        = string
-  description = "The type of address to reserve, either \"INTERNAL\" or \"EXTERNAL\". If unspecified, defaults to \"INTERNAL\"."
-  default     = "INTERNAL"
-}
-
 variable "enable_cloud_dns" {
-  description = "If a value is set, register records in Cloud DNS."
+  description = "If set, register records in Cloud DNS for addresses that do not set their own `enable_cloud_dns` attribute."
   type        = bool
   default     = false
 }
 
 variable "enable_reverse_dns" {
-  description = "If a value is set, register reverse DNS PTR records in Cloud DNS in the managed zone specified by dns_reverse_zone"
+  description = "If set, register reverse DNS PTR records in Cloud DNS for addresses that do not set their own `enable_reverse_dns` attribute."
   type        = bool
   default     = false
 }
 
+variable "subnetwork" {
+  type        = string
+  description = "The default subnet containing the addresses.  For EXTERNAL addresses use the empty string, \"\".  (e.g. \"projects/<project-name>/regions/<region-name>/subnetworks/<subnetwork-name>\")"
+  default     = ""
+}
+
+variable "address_type" {
+  type        = string
+  description = "The default type of address to reserve, either \"INTERNAL\" or \"EXTERNAL\". If unspecified, defaults to \"INTERNAL\"."
+  default     = "INTERNAL"
+}
+
 variable "purpose" {
   type        = string
-  description = "The purpose of the resource(GCE_ENDPOINT, SHARED_LOADBALANCER_VIP, VPC_PEERING)."
+  description = "The default purpose of the resource (GCE_ENDPOINT, SHARED_LOADBALANCER_VIP, VPC_PEERING, PRIVATE_SERVICE_CONNECT)."
   default     = "GCE_ENDPOINT"
 }
 
 variable "network_tier" {
   type        = string
-  description = "The networking tier used for configuring this address."
+  description = "The default networking tier used for configuring the addresses."
   default     = "PREMIUM"
 }
 
 variable "prefix_length" {
   type        = number
-  description = "The prefix length of the IP range."
+  description = "The default prefix length of the IP ranges."
   default     = 16
 }
 
 variable "ip_version" {
   type        = string
-  description = "The IP Version that will be used by this address."
+  description = "The default IP Version that will be used by the addresses."
   default     = "IPV4"
 }
 
 variable "labels" {
   type        = map(string)
-  description = "Labels to apply to this address."
+  description = "The default labels to apply to the addresses."
   default     = {}
-}
-
-variable "descriptions" {
-  description = "A list of descriptions to add to each address."
-  type        = list(string)
-  default     = []
 }
